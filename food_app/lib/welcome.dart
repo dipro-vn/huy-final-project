@@ -84,24 +84,29 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            width: 100,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(color: Colors.white),
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
-                          Text(
-                            AppTexts.signInWith,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 16),
+                          Expanded(
+                            child: Text(
+                              AppTexts.signInWith,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16),
+                            ),
                           ),
-                          Container(
-                            width: 100,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(color: Colors.white),
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(color: Colors.white),
+                                ),
                               ),
                             ),
                           ),
