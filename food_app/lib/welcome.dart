@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/image_text/app_image.dart';
+import 'package:food_app/image_text/app_text.dart';
 
 import 'main.dart';
 
@@ -11,8 +13,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreen extends State<WelcomeScreen> {
-  TextEditingController changename = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -21,9 +21,9 @@ class _WelcomeScreen extends State<WelcomeScreen> {
     return Scaffold(
       body: Container(
           alignment: Alignment.center,
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('image/welcome.jpg'), fit: BoxFit.cover)),
+                  image: AssetImage(AppImages.welcome), fit: BoxFit.cover)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -36,10 +36,10 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                         margin: EdgeInsets.only(
                             right: 40, left: 20, top: height / 4),
                         width: width,
-                        child: const FittedBox(
+                        child: FittedBox(
                           child: Text(
-                            'WELCOME TO ',
-                            style: TextStyle(
+                            AppTexts.welcome,
+                            style: const TextStyle(
                               fontWeight: FontWeight.w900,
                             ),
                           ),
@@ -48,21 +48,21 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                       Container(
                         padding: EdgeInsets.only(left: 20, right: width / 3),
                         width: width,
-                        child: const FittedBox(
+                        child: FittedBox(
                           child: Text(
-                            'FOODHUB',
-                            style: TextStyle(
+                            AppTexts.foodhub,
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w900, color: Colors.red),
                           ),
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.only(left: 20, right: 40),
+                        padding: const EdgeInsets.only(left: 20, right: 40),
                         width: width,
-                        child: const FittedBox(
+                        child: FittedBox(
                           child: Text(
-                            "Your favorite foods delivered fast at your door",
-                            style: TextStyle(
+                            AppTexts.your,
+                            style: const TextStyle(
                               color: Colors.white,
                             ),
                           ),
@@ -72,7 +72,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 height: height / 3 - height / 20,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -80,10 +80,10 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                     Container(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       width: width,
-                      child: const FittedBox(
+                      child: FittedBox(
                         child: Text(
-                          '---------------------  Sign in with  ---------------------',
-                          style: TextStyle(
+                          AppTexts.signInWith,
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                         ),
@@ -108,16 +108,16 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      'icon/fb_icon.png',
+                                      AppImages.facebook,
                                       width: 30,
                                       height: 30,
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Text(
-                                      'FACEBOOK',
-                                      style: TextStyle(
+                                    Text(
+                                      AppTexts.faceBook,
+                                      style: const TextStyle(
                                           color: Colors.black, fontSize: 20),
                                     ),
                                   ],
@@ -137,16 +137,16 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Image.asset(
-                                      'icon/gg.jpg',
+                                      AppImages.google,
                                       width: 30,
                                       height: 30,
                                     ),
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    const Text(
-                                      ' GOOGLE ',
-                                      style: TextStyle(
+                                    Text(
+                                      AppTexts.gooGle,
+                                      style: const TextStyle(
                                           color: Colors.black, fontSize: 20),
                                     ),
                                   ],
@@ -167,10 +167,10 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, '/Signup');
                           },
-                          child: const FittedBox(
+                          child: FittedBox(
                             child: Text(
-                              'Start with email or phone',
-                              style: TextStyle(fontSize: 20),
+                              AppTexts.emailOrPhone,
+                              style: const TextStyle(fontSize: 15),
                             ),
                           )),
                     ),
@@ -182,15 +182,15 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              'Already have an account?',
-                              style: TextStyle(color: Colors.white),
+                            Text(
+                              AppTexts.haveAccount,
+                              style: const TextStyle(color: Colors.white),
                             ),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, '/Login');
                                 },
-                                child: const Text('Log in'))
+                                child: Text(AppTexts.login))
                           ],
                         ),
                       ),

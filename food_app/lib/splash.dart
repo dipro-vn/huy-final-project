@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:food_app/abc/app_image.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = '/Splash';
@@ -20,9 +21,9 @@ class _SplashScreen extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('image/Splash.jpg'),
+          image: AssetImage(AppImages.splash),
           fit: BoxFit.cover,
         )),
       ),
