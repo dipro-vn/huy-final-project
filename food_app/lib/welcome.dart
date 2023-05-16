@@ -78,15 +78,34 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
+                      alignment: Alignment.center,
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       width: width,
-                      child: FittedBox(
-                        child: Text(
-                          AppTexts.signInWith,
-                          style: const TextStyle(
-                            color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width: 100,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
+                          Text(
+                            AppTexts.signInWith,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 16),
+                          ),
+                          Container(
+                            width: 100,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Container(
