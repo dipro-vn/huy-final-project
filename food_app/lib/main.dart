@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/login.dart';
+import 'package:food_app/signup.dart';
 import 'splash.dart';
 import 'welcome.dart';
 
@@ -17,6 +19,8 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName: (ctx) => SplashScreen(),
         WelcomeScreen.routeName: (ctx) => const WelcomeScreen(),
+        SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+        LoginScreen.routeName: (ctx) => const LoginScreen(),
       },
     );
   }
