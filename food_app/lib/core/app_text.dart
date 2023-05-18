@@ -1,3 +1,4 @@
+
 class AppTexts {
   static String welcome = 'WELCOME TO ';
   static String foodhub = 'FOODHUB';

@@ -59,7 +59,12 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/image/
+  - assets/image/Splash.jpg
+  - assets/image/fod.jpg
+  - assets/image/welcome.jpg
+  - assets/icon/fb_icon.png
+  - assets/icon/gg.jpg
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

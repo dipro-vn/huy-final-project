@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/image_text/app_image.dart';
-import 'package:food_app/image_text/app_text.dart';
-
+import 'package:food_app/core/app_image.dart';
+import 'package:food_app/core/app_text.dart';
 import 'main.dart';
 
 class WelcomeScreen extends StatefulWidget {
