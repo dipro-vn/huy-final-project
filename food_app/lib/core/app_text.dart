@@ -1,3 +1,4 @@
+
 class AppTexts {
   static String welcome = 'WELCOME TO ';
   static String foodhub = 'FOODHUB';
@@ -8,4 +9,7 @@ class AppTexts {
   static String emailOrPhone = 'Start with email or phone';
   static String haveAccount = 'Already have an account?';
   static String login = 'Log in';
+  static String signup = 'Sign Up';
+  static String forGotPass = 'Forgot password';
+  static String notAccount = "Don't have an account?";
 }

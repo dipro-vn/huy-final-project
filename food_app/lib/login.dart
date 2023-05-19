@@ -1,78 +1,116 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
-import 'main.dart';
+import 'package:http/http.dart' as http;
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
-  static const routeName = '/Welcome';
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+  static const routeName = '/Login';
 
   @override
-  State<StatefulWidget> createState() => _WelcomeScreen();
+  State<StatefulWidget> createState() => _LoginScreen();
 }
 
-class _WelcomeScreen extends State<WelcomeScreen> {
+class _LoginScreen extends State<LoginScreen> {
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  String present = "";
+  Timer? timer;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      body: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(AppImages.welcome), fit: BoxFit.cover)),
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            right: 40, left: 20, top: height / 4),
-                        width: width,
-                        child: FittedBox(
-                          child: Text(
-                            AppTexts.welcome,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
+              Container(
+                  height: height / 4,
+                  alignment: Alignment.bottomLeft,
+                  margin: EdgeInsets.only(right: width / 2, left: 20),
+                  child: FittedBox(
+                    child: Text(
+                      AppTexts.login,
+                      style: const TextStyle(
+                          fontSize: 100, fontWeight: FontWeight.w900),
+                    ),
+                  )),
+              Container(
+                height: 11 * height / 20,
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextFormField(
+                      controller: email,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        hintText: "E-mail",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      Container(
-                        padding: EdgeInsets.only(left: 20, right: width / 3),
-                        width: width,
-                        child: FittedBox(
-                          child: Text(
-                            AppTexts.foodhub,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w900, color: Colors.red),
-                          ),
+                    ),
+                    TextFormField(
+                      controller: password,
+                      keyboardType: TextInputType.visiblePassword,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 40),
-                        width: width,
-                        child: FittedBox(
+                    ),
+                    SizedBox(
+                      child: TextButton(
+                          onPressed: () {},
                           child: Text(
-                            AppTexts.your,
-                            style: const TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
+                            AppTexts.forGotPass,
+                            style: TextStyle(color: Colors.red),
+                          )),
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: Size(width - 80, height / 18),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            backgroundColor: Color.fromARGB(165, 235, 60, 60)),
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/Home',
+                          );
+                        },
+                        child: Text(
+                          AppTexts.login,
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 12),
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppTexts.notAccount,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 17, 17, 17)),
                         ),
-                      )
-                    ],
-                  ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/Signup');
+                            },
+                            child: Text(AppTexts.signup)),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: height / 3 - height / 20,
+              Container(
+                height: height / 5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -81,13 +119,13 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       width: width,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Container(
                               decoration: const BoxDecoration(
                                 border: Border(
-                                  bottom: BorderSide(color: Colors.white),
+                                  bottom: BorderSide(color: Colors.black),
                                 ),
                               ),
                             ),
@@ -97,14 +135,14 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                               AppTexts.signInWith,
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 16),
+                                  color: Colors.black, fontSize: 16),
                             ),
                           ),
                           Expanded(
                             child: Container(
                               decoration: const BoxDecoration(
                                 border: Border(
-                                  bottom: BorderSide(color: Colors.white),
+                                  bottom: BorderSide(color: Colors.black),
                                 ),
                               ),
                             ),
@@ -178,51 +216,13 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                         ],
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.only(right: 20, left: 20),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              fixedSize: Size(width - 50, height / 18),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              backgroundColor:
-                                  const Color.fromARGB(100, 1, 1, 1)),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/Signup');
-                          },
-                          child: FittedBox(
-                            child: Text(
-                              AppTexts.emailOrPhone,
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                          )),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.only(right: width / 5, left: width / 5),
-                      width: width,
-                      child: FittedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppTexts.haveAccount,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/Login');
-                                },
-                                child: Text(AppTexts.login))
-                          ],
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
