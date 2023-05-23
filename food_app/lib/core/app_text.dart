@@ -1,4 +1,3 @@
-
 class AppTexts {
   static String welcome = 'WELCOME TO ';
   static String foodhub = 'FOODHUB';
@@ -12,4 +11,5 @@ class AppTexts {
   static String signup = 'Sign Up';
   static String forGotPass = 'Forgot password';
   static String notAccount = "Don't have an account?";
+  static String find = 'find for food or res';
 }
