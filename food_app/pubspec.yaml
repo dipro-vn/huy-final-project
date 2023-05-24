@@ -64,7 +64,27 @@ flutter:
   - assets/image/welcome.jpg
   - assets/icon/fb_icon.png
   - assets/icon/gg.jpg
+  - assets/icon/Helps.png
+  - assets/icon/Location.png
+  - assets/icon/Message.png
+  - assets/icon/oder.png
+  - assets/icon/power.png
+  - assets/icon/Profile.png
+  - assets/icon/Setting.png
+  - assets/icon/Wallet.png
+  - assets/icon/filter.png
+  - assets/image/avatar.png
+  
 
+
+
+
+  fonts:
+  - family: NunitoSans
+    fonts:
+      - asset:  assets/fonts/NunitoSans.ttf
+      - asset: assets/fonts/NunitoSans-Regular.ttf
+   
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,10 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
 import 'package:http/http.dart' as http;
-import 'categoris.dart';
-import 'home_item.dart';
+import 'Page/BeefScreen.dart';
+import 'Page/ChickenScreen.dart';
+import 'Page/LambScreen.dart';
+import 'Page/PastaScreen.dart';
+import 'Page/PorkScreen.dart';
+import 'Page/SeafoodScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,94 +20,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  List<Categories> _foodAmerican = [];
-  List<Categories> _foodCanada = [];
-  List<Categories> _foodJapan = [];
-  List<Categories> _foodItalia = [];
-
-  Future<http.Response> getAmerican() async {
-    return await http.get(Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/filter.php?a=American'));
-  }
-
-  Future<void> fetchAmerican() async {
-    var result = await getAmerican();
-    var userMap = jsonDecode(result.body);
-    final List data = userMap["meals"];
-    var american = data
-        .map(
-          (e) => Categories.fromJson(e),
-        )
-        .toList();
-    setState(() {
-      _foodAmerican = american;
-    });
-  }
-
-  Future<http.Response> getCanada() async {
-    return await http.get(Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian'));
-  }
-
-  Future<void> fetchCanada() async {
-    var result = await getCanada();
-    var userMap = jsonDecode(result.body);
-    final List data = userMap["meals"];
-    var canada = data
-        .map(
-          (e) => Categories.fromJson(e),
-        )
-        .toList();
-    setState(() {
-      _foodCanada = canada;
-    });
-  }
-
-  Future<http.Response> getJapan() async {
-    return await http.get(Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/filter.php?a=Japanese'));
-  }
-
-  Future<void> fetchJapan() async {
-    var result = await getJapan();
-    var userMap = jsonDecode(result.body);
-    final List data = userMap["meals"];
-    var japan = data
-        .map(
-          (e) => Categories.fromJson(e),
-        )
-        .toList();
-    setState(() {
-      _foodJapan = japan;
-    });
-  }
-
-  Future<http.Response> getItalia() async {
-    return await http.get(Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/filter.php?a=Italian'));
-  }
-
-  Future<void> fetchItalia() async {
-    var result = await getItalia();
-    var userMap = jsonDecode(result.body);
-    final List data = userMap["meals"];
-    var italia = data
-        .map(
-          (e) => Categories.fromJson(e),
-        )
-        .toList();
-    setState(() {
-      _foodItalia = italia;
-    });
-  }
+  var page = 1;
 
   @override
   void initState() {
     super.initState();
-    fetchAmerican();
-    fetchCanada();
-    fetchJapan();
-    fetchItalia();
   }
 
   @override
@@ -110,25 +32,32 @@ class _HomeScreen extends State<HomeScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.black26),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 192, 179, 179),
+        backgroundColor: const Color(0xFFFFFFFF),
         title: Column(
           children: const [
             Text(
               'Deliver to',
-              style: TextStyle(color: Colors.black87, fontSize: 10),
+              style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  fontFamily: AppFonts.nunitoSans),
             ),
             Text(
               '5000  Pretty View Lane',
               style: TextStyle(
-                  color: Color.fromARGB(221, 255, 0, 0), fontSize: 12),
+                  color: Color.fromARGB(221, 255, 0, 0),
+                  fontSize: 15,
+                  fontFamily: AppFonts.nunitoSans),
             )
           ],
         ),
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       drawer: Drawer(
+        backgroundColor: const Color(0xFFFFFFFF),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -138,47 +67,140 @@ class _HomeScreen extends State<HomeScreen> {
                 children: [
                   DrawerHeader(
                     decoration: const BoxDecoration(
-                      color: Colors.blue,
+                      color: Color(0xFFFFFFFF),
                     ),
-                    child: Container(
-                      child: Column(
-                        children: const [Text('Name'), Text('email')],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                  image: AssetImage(AppImages.avatar),
+                                  fit: BoxFit.cover)),
+                        ),
+                        const Text(
+                          'Name',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppFonts.nunitoSans),
+                        ),
+                        const Text(
+                          'Email',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: AppFonts.nunitoSans),
+                        )
+                      ],
                     ),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.my_library_books),
-                    title: const Text('My Oders'),
+                    leading: Image.asset(
+                      AppImages.oder,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'My Oders',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.person),
-                    title: const Text('My profile'),
+                    leading: Image.asset(
+                      AppImages.profile,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'My profile',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.maps_home_work_sharp),
-                    title: const Text('Delivery Adress'),
+                    leading: Image.asset(
+                      AppImages.location,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'Delivery Adress',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.payment),
-                    title: const Text('Payment Methods'),
+                    leading: Image.asset(
+                      AppImages.pay,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'Payment Methods',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.contact_mail),
-                    title: const Text('Contact Us'),
+                    leading: Image.asset(
+                      AppImages.contact,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'Contact Us',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text('Settings'),
+                    leading: Image.asset(
+                      AppImages.setting,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'Settings',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                   ListTile(
-                    leading: const Icon(Icons.help_center),
-                    title: const Text('Help & FAQs'),
+                    leading: Image.asset(
+                      AppImages.help,
+                      width: 23,
+                      height: 23,
+                    ),
+                    title: const Text(
+                      'Help & FAQs',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          fontFamily: AppFonts.nunitoSans),
+                    ),
                     onTap: () {},
                   ),
                 ],
@@ -187,337 +209,282 @@ class _HomeScreen extends State<HomeScreen> {
             Container(
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(50)),
-              margin: const EdgeInsets.only(bottom: 20, left: 30),
-              height: 50,
-              width: 120,
+                  color: Color(0xFFFE724C),
+                  borderRadius: BorderRadius.circular(50)),
+              margin: const EdgeInsets.only(bottom: 32, left: 22),
+              height: 43,
+              width: 117,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  Icon((Icons.power_settings_new)),
-                  Text("Log Out")
+                children: [
+                  Image.asset(
+                    'icon/power.png',
+                    width: 26,
+                    height: 26,
+                  ),
+                  const Text(
+                    "Log Out",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: AppFonts.nunitoSans),
+                  )
                 ],
               ),
             )
           ],
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(AppImages.background),
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.6), BlendMode.dstATop),
-                fit: BoxFit.cover)),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 20, top: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            label: Row(
-                              children: [
-                                const Icon(Icons.search),
-                                Text(AppTexts.find),
-                              ],
-                            )),
-                      ),
-                    ),
-                    const Icon(Icons.filter_list_outlined)
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 10, right: 10),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Opacity(
-                          opacity: 0.9,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/Beef');
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 70,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(255, 200, 190, 190),
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.network(AppImages.beef),
-                                  const Text(
-                                    "Beef",
-                                    style: TextStyle(fontSize: 10),
-                                  ),
-                                ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 19, bottom: 30),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 25, right: 10),
+                    width: 255,
+                    height: 50,
+                    child: TextField(
+                      cursorColor: Color(0xFFFCFCFD),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          label: Row(
+                            children: [
+                              const Icon(Icons.search),
+                              Text(
+                                AppTexts.find,
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: AppFonts.nunitoSans),
                               ),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Beef');
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 200, 190, 190),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.network(AppImages.chicken),
-                                const Text(
-                                  "Chicken",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Beef');
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color:
-                                    const Color.fromARGB(2255, 200, 190, 190),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.network(AppImages.lamb),
-                                const Text(
-                                  "Lamb",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Beef');
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 200, 190, 190),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.network(AppImages.seafood),
-                                const Text(
-                                  "Seafood",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Beef');
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 200, 190, 190),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.network(AppImages.pork),
-                                const Text(
-                                  "Pork",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, '/Beef');
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 70,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 200, 190, 190),
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.network(AppImages.pasta),
-                                const Text(
-                                  "Pasta",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                            ],
+                          )),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          border: Border(top: BorderSide(color: Colors.black))),
-                    )
-                  ],
-                ),
+                  ),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        image: DecorationImage(
+                            image: AssetImage(AppImages.filter),
+                            fit: BoxFit.cover)),
+                  )
+                ],
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 30, left: 10),
-                height: 180,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'American food',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 20),
+            ),
+            SizedBox(
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 1;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15, left: 25),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 1
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(
+                            AppImages.beef,
+                            width: 50,
+                            height: 50,
+                          ),
+                          const Text(
+                            "Beef",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 5,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 2;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 2
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(AppImages.chicken),
+                          const Text(
+                            "Chicken",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: _foodAmerican.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Food_Item(
-                                image_food: _foodAmerican[index].strMealThumb!,
-                                name_food: _foodAmerican[index].strMeal!,
-                                id_food: _foodAmerican[index].idMeal!);
-                          },
-                        ),
-                      )
-                    ]),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 3;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 3
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(AppImages.lamb),
+                          const Text(
+                            "Lamb",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 4;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 4
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(AppImages.seafood),
+                          const Text(
+                            "Seafood",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 5;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 5
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(AppImages.pork),
+                          const Text(
+                            "Pork",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        page = 6;
+                      });
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      alignment: Alignment.center,
+                      height: 98,
+                      width: 58,
+                      decoration: BoxDecoration(
+                          color: page == 6
+                              ? Color(0xFFFE724C)
+                              : Color(0xFF40D3D1D8),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.network(AppImages.pasta),
+                          const Text(
+                            "Pasta",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: AppFonts.nunitoSans),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 10),
-                height: 180,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Canadian food',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _foodCanada.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Food_Item(
-                              image_food: _foodCanada[index].strMealThumb!,
-                              name_food: _foodCanada[index].strMeal!,
-                              id_food: _foodCanada[index].idMeal!);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 10),
-                height: 180,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Japanese food',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _foodJapan.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Food_Item(
-                              image_food: _foodJapan[index].strMealThumb!,
-                              name_food: _foodJapan[index].strMeal!,
-                              id_food: _foodJapan[index].idMeal!);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 20, left: 10),
-                height: 180,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Italian food',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: _foodItalia.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Food_Item(
-                              image_food: _foodItalia[index].strMealThumb!,
-                              name_food: _foodItalia[index].strMeal!,
-                              id_food: _foodItalia[index].idMeal!);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              )
-            ],
-          ),
+            ),
+            page == 1 ? Beef() : Container(),
+            page == 2 ? Chicken() : Container(),
+            page == 3 ? Lamb() : Container(),
+            page == 4 ? Seafood() : Container(),
+            page == 5 ? Pork() : Container(),
+            page == 6 ? Pasta() : Container(),
+            const SizedBox(
+              height: 5,
+            )
+          ],
         ),
       ),
     );

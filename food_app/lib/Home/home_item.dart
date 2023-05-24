@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/app_fonts.dart';
+
 class Food_Item extends StatelessWidget {
   Food_Item({
     required this.image_food,
@@ -15,53 +17,106 @@ class Food_Item extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        margin: EdgeInsets.only(right: 10, left: 10, bottom: 10),
-        width: 200,
-        height: 200,
+        width: 266,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 165, 162, 154),
+          color: const Color(0xFF40D3D1D8),
         ),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, '/Detail',
-                arguments: Food_Item(
-                    image_food: image_food,
-                    name_food: name_food,
-                    id_food: id_food));
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            image_food,
-                          ),
-                          fit: BoxFit.cover),
-                      borderRadius: BorderRadius.circular(20)),
-                ),
-              ),
-              Container(
-                alignment: Alignment.centerLeft,
-                height: 30,
-                width: 180,
-                child: Row(children: [
-                  Flexible(
-                    child: Text(
-                      name_food,
-                      overflow: TextOverflow.clip,
-                      maxLines: 2,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 10),
-                    ),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/Detail',
+                    arguments: Food_Item(
+                        image_food: image_food,
+                        name_food: name_food,
+                        id_food: id_food));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 136,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              image_food,
+                            ),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(20)),
                   ),
-                ]),
-              )
-            ],
-          ),
+                  Expanded(
+                    child: Row(children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(left: 13, top: 12),
+                        child: Text(
+                          name_food,
+                          overflow: TextOverflow.clip,
+                          maxLines: 2,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15,
+                              fontFamily: AppFonts.nunitoSans),
+                        ),
+                      ),
+                    ]),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                    height: 28,
+                    width: 69,
+                    margin: const EdgeInsets.only(top: 10, left: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: const Color(0xFFFFFFFF),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          '4.5',
+                          style: TextStyle(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: AppFonts.nunitoSans),
+                        ),
+                        Icon(
+                          Icons.star,
+                          color: Color(0xFFFFC529),
+                          size: 12,
+                        ),
+                        Text(
+                          '(25+)',
+                          style: TextStyle(
+                              fontSize: 8,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: AppFonts.nunitoSans),
+                        ),
+                      ],
+                    )),
+                Container(
+                    height: 28,
+                    width: 28,
+                    margin: const EdgeInsets.only(top: 10, right: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: const Color.fromARGB(255, 210, 200, 200),
+                    ),
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Color(0xFFFFFFFF),
+                      size: 20,
+                    )),
+              ],
+            ),
+          ],
         ),
       ),
     );
