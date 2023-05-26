@@ -11,5 +11,5 @@ class AppTexts {
   static String signup = 'Sign Up';
   static String forGotPass = 'Forgot password';
   static String notAccount = "Don't have an account?";
-  static String find = 'find for food or res';
+  static String find = 'Find for food or res';
 }

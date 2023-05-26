@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../categoris.dart';
+import '../meals.dart';
 import '../home_item.dart';
 
 class Seafood extends StatefulWidget {
@@ -14,11 +14,11 @@ class Seafood extends StatefulWidget {
 }
 
 class _Seafood extends State<Seafood> {
-  List<Categories> _foodAmerican = [];
-  List<Categories> _foodCanada = [];
-  List<Categories> _foodJapan = [];
-  List<Categories> _foodItalia = [];
-  List<Categories> _seafood = [];
+  List<Meals> _foodAmerican = [];
+  List<Meals> _foodCanada = [];
+  List<Meals> _foodJapan = [];
+  List<Meals> _foodItalia = [];
+  List<Meals> _seafood = [];
 
   Future<http.Response> getSeafood() async {
     return await http.get(
@@ -31,7 +31,7 @@ class _Seafood extends State<Seafood> {
     final List data = userMap["meals"];
     var seafood = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -50,7 +50,7 @@ class _Seafood extends State<Seafood> {
     final List data = userMap["meals"];
     var american = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -69,7 +69,7 @@ class _Seafood extends State<Seafood> {
     final List data = userMap["meals"];
     var canada = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -88,7 +88,7 @@ class _Seafood extends State<Seafood> {
     final List data = userMap["meals"];
     var japan = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -107,7 +107,7 @@ class _Seafood extends State<Seafood> {
     final List data = userMap["meals"];
     var italia = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -132,7 +132,7 @@ class _Seafood extends State<Seafood> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Sea Food',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -149,7 +149,8 @@ class _Seafood extends State<Seafood> {
                   itemCount: _seafood.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _seafood[index].strMealThumb!,
                           name_food: _seafood[index].strMeal!,
@@ -161,7 +162,7 @@ class _Seafood extends State<Seafood> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'American Food',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -178,7 +179,8 @@ class _Seafood extends State<Seafood> {
                   itemCount: _foodAmerican.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodAmerican[index].strMealThumb!,
                           name_food: _foodAmerican[index].strMeal!,
@@ -190,7 +192,7 @@ class _Seafood extends State<Seafood> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Canada Food',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -207,7 +209,8 @@ class _Seafood extends State<Seafood> {
                   itemCount: _foodCanada.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodCanada[index].strMealThumb!,
                           name_food: _foodCanada[index].strMeal!,
@@ -219,7 +222,7 @@ class _Seafood extends State<Seafood> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Japan Food',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -236,7 +239,8 @@ class _Seafood extends State<Seafood> {
                   itemCount: _foodJapan.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodJapan[index].strMealThumb!,
                           name_food: _foodJapan[index].strMeal!,
@@ -248,7 +252,7 @@ class _Seafood extends State<Seafood> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Italia Food',
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
@@ -265,7 +269,8 @@ class _Seafood extends State<Seafood> {
                   itemCount: _foodItalia.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodItalia[index].strMealThumb!,
                           name_food: _foodItalia[index].strMeal!,

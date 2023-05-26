@@ -1,25 +1,25 @@
-class Categories {
+class Meals {
   String? idMeal;
   String? strMeal;
   String? strMealThumb;
 
-  Categories({
+  Meals({
     this.idMeal,
     this.strMeal,
     this.strMealThumb,
   });
 
-  factory Categories.fromJson(dynamic json) {
-    return Categories(
+  factory Meals.fromJson(dynamic json) {
+    return Meals(
       idMeal: json['idMeal'],
       strMeal: json['strMeal'],
       strMealThumb: json['strMealThumb'],
     );
   }
 
-  static List<Categories> recipesFromSnapshot(List snapshot) {
+  static List<Meals> recipesFromSnapshot(List snapshot) {
     return snapshot.map((data) {
-      return Categories.fromJson(data);
+      return Meals.fromJson(data);
     }).toList();
   }
 

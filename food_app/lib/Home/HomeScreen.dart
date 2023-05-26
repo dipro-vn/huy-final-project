@@ -4,12 +4,9 @@ import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
 import 'package:http/http.dart' as http;
-import 'Page/BeefScreen.dart';
-import 'Page/ChickenScreen.dart';
-import 'Page/LambScreen.dart';
-import 'Page/PastaScreen.dart';
-import 'Page/PorkScreen.dart';
-import 'Page/SeafoodScreen.dart';
+import 'cotegories_item.dart';
+import 'meals.dart';
+import 'home_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,11 +17,79 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  var page = 1;
+  List<Meals> _data = [];
+  List<Categories> _categories = [];
+  bool isLoading = false;
+  // tao item categorie co id name image
+
+  // click item set categorie
+
+  // categorie => id
+
+  // id == id active ?? ko active
+
+  Future<http.Response> getCategories() async {
+    return await http.get(
+        Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
+  }
+
+  Future<void> fetchCategories() async {
+    var result = await getCategories();
+    var userMap = jsonDecode(result.body);
+    final List data = userMap["categories"];
+    var ctg = data
+        .map(
+          (e) => Categories.fromJson(e),
+        )
+        .toList();
+    setState(() {
+      _categories = ctg;
+    });
+    if (ctg.isNotEmpty) {
+      fetchData(_categories[0].strCategory ?? '');
+      _categories = _categories.map((e) {
+        if (e == _categories[0]) {
+          return Categories(
+            idCategory: e.idCategory!,
+            strCategoryThumb: e.strCategoryThumb!,
+            strCategory: e.strCategory!,
+            kick: true,
+          );
+        }
+        return Categories(
+          idCategory: e.idCategory!,
+          strCategoryThumb: e.strCategoryThumb!,
+          strCategory: e.strCategory!,
+          kick: false,
+        );
+      }).toList();
+    }
+  }
+
+  Future<http.Response> getData(String strMeal) async {
+    return await http.get(Uri.parse(
+        'http://www.themealdb.com/api/json/v1/1/filter.php?c=$strMeal'));
+  }
+
+  Future<void> fetchData(String name) async {
+    var result = await getData(name);
+    var userMap = jsonDecode(result.body);
+    final List data = userMap["meals"];
+    var beef = data
+        .map(
+          (e) => Meals.fromJson(e),
+        )
+        .toList();
+    setState(() {
+      _data = beef;
+      isLoading = true;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    fetchCategories();
   }
 
   @override
@@ -218,7 +283,7 @@ class _HomeScreen extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Image.asset(
-                    'icon/power.png',
+                    'assets/icon/power.png',
                     width: 26,
                     height: 26,
                   ),
@@ -272,215 +337,98 @@ class _HomeScreen extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(14),
                         image: DecorationImage(
                             image: AssetImage(AppImages.filter),
-                            fit: BoxFit.cover)),
+                            fit: BoxFit.cover),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0xff40D3D1D8),
+                            offset: Offset(0, 15),
+                            blurRadius: 30,
+                          )
+                        ]),
                   )
                 ],
               ),
             ),
             SizedBox(
-              height: 100,
-              child: ListView(
+              height: 110,
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  GestureDetector(
+                itemCount: _categories.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
                     onTap: () {
                       setState(() {
-                        page = 1;
+                        fetchData(_categories[index].strCategory!);
+                        _categories = _categories.map((e) {
+                          if (e == _categories[index]) {
+                            return Categories(
+                              idCategory: e.idCategory!,
+                              strCategoryThumb: e.strCategoryThumb!,
+                              strCategory: e.strCategory!,
+                              kick: true,
+                            );
+                          }
+                          return Categories(
+                            idCategory: e.idCategory!,
+                            strCategoryThumb: e.strCategoryThumb!,
+                            strCategory: e.strCategory!,
+                            kick: false,
+                          );
+                        }).toList();
                       });
                     },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15, left: 25),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 1
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(
-                            AppImages.beef,
-                            width: 50,
-                            height: 50,
-                          ),
-                          const Text(
-                            "Beef",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
+                    child: Categories_Item(
+                      image: _categories[index].strCategoryThumb!,
+                      name: _categories[index].strCategory!,
+                      id: _categories[index].idCategory!,
+                      select: _categories[index].kick ?? false,
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        page = 2;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 2
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(AppImages.chicken),
-                          const Text(
-                            "Chicken",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        page = 3;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 3
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(AppImages.lamb),
-                          const Text(
-                            "Lamb",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        page = 4;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 4
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(AppImages.seafood),
-                          const Text(
-                            "Seafood",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        page = 5;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 5
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(AppImages.pork),
-                          const Text(
-                            "Pork",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        page = 6;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 15),
-                      alignment: Alignment.center,
-                      height: 98,
-                      width: 58,
-                      decoration: BoxDecoration(
-                          color: page == 6
-                              ? Color(0xFFFE724C)
-                              : Color(0xFF40D3D1D8),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.network(AppImages.pasta),
-                          const Text(
-                            "Pasta",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: AppFonts.nunitoSans),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
-            page == 1 ? Beef() : Container(),
-            page == 2 ? Chicken() : Container(),
-            page == 3 ? Lamb() : Container(),
-            page == 4 ? Seafood() : Container(),
-            page == 5 ? Pork() : Container(),
-            page == 6 ? Pasta() : Container(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
+                  child: const Text(
+                    'Food',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        fontFamily: AppFonts.nunitoSans),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  height: 230,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                margin: const EdgeInsets.only(
+                                    left: 15, top: 5, bottom: 5),
+                                child: Food_Item(
+                                    image_food: _data[index].strMealThumb!,
+                                    name_food: _data[index].strMeal!,
+                                    id_food: _data[index].idMeal!),
+                              );
+                            },
+                          ),
+                        )
+                      ]),
+                ),
+                const SizedBox(
+                  height: 5,
+                )
+              ],
+            ),
             const SizedBox(
               height: 5,
             )

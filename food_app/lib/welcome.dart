@@ -119,10 +119,9 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                         children: [
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  fixedSize:
-                                      Size((width - 70) / 2, height / 18),
+                                  fixedSize: Size(140, 55),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(27)),
                                   backgroundColor:
                                       const Color.fromARGB(255, 255, 255, 255)),
                               onPressed: () {},
@@ -148,10 +147,9 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                               )),
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  fixedSize:
-                                      Size((width - 70) / 2, height / 18),
+                                  fixedSize: Size(140, 55),
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20)),
+                                      borderRadius: BorderRadius.circular(27)),
                                   backgroundColor:
                                       const Color.fromARGB(255, 255, 255, 255)),
                               onPressed: () {},

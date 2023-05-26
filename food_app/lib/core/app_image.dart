@@ -11,13 +11,13 @@ class AppImages {
       "https://www.themealdb.com/images/category/seafood.png";
   static String pork = "https://www.themealdb.com/images/category/pork.png";
   static String pasta = "https://www.themealdb.com/images/category/pasta.png";
-  static String avatar = 'image/avatar.png';
-  static String oder = 'icon/oder.png';
-  static String profile = 'icon/Profile.png';
-  static String location = 'icon/Location.png';
-  static String pay = 'icon/Wallet.png';
-  static String contact = 'icon/Message.png';
-  static String setting = 'icon/Setting.png';
-  static String help = 'icon/Helps.png';
-  static String filter = 'icon/filter.png';
+  static String avatar = 'assets/image/avatar.png';
+  static String oder = 'assets/icon/oder.png';
+  static String profile = 'assets/icon/Profile.png';
+  static String location = 'assets/icon/Location.png';
+  static String pay = 'assets/icon/Wallet.png';
+  static String contact = 'assets/icon/Message.png';
+  static String setting = 'assets/icon/Setting.png';
+  static String help = 'assets/icon/Helps.png';
+  static String filter = 'assets/icon/filter.png';
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../core/app_fonts.dart';
-import '../categoris.dart';
+import '../meals.dart';
 import '../home_item.dart';
 
 class Beef extends StatefulWidget {
@@ -13,24 +13,25 @@ class Beef extends StatefulWidget {
 }
 
 class _Beef extends State<Beef> {
-  List<Categories> _foodAmerican = [];
-  List<Categories> _foodCanada = [];
-  List<Categories> _foodJapan = [];
-  List<Categories> _foodItalia = [];
-  List<Categories> _beef = [];
+  List<Meals> _foodAmerican = [];
+  List<Meals> _foodCanada = [];
+  List<Meals> _foodJapan = [];
+  List<Meals> _foodItalia = [];
+  List<Meals> _beef = [];
+  String API = '';
 
-  Future<http.Response> getBeef() async {
+  Future<http.Response> getData(API) async {
     return await http.get(
-        Uri.parse('http://www.themealdb.com/api/json/v1/1/filter.php?c=Beef'));
+        Uri.parse('http://www.themealdb.com/api/json/v1/1/filter.php?c=$API'));
   }
 
-  Future<void> fetchBeef() async {
-    var result = await getBeef();
+  Future<void> fetchData() async {
+    var result = await getData(API);
     var userMap = jsonDecode(result.body);
     final List data = userMap["meals"];
     var beef = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -49,7 +50,7 @@ class _Beef extends State<Beef> {
     final List data = userMap["meals"];
     var american = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -68,7 +69,7 @@ class _Beef extends State<Beef> {
     final List data = userMap["meals"];
     var canada = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -87,7 +88,7 @@ class _Beef extends State<Beef> {
     final List data = userMap["meals"];
     var japan = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -106,7 +107,7 @@ class _Beef extends State<Beef> {
     final List data = userMap["meals"];
     var italia = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
@@ -121,7 +122,7 @@ class _Beef extends State<Beef> {
     fetchCanada();
     fetchJapan();
     fetchItalia();
-    fetchBeef();
+    fetchData();
   }
 
   @override
@@ -131,7 +132,7 @@ class _Beef extends State<Beef> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Beef food',
               style: TextStyle(
@@ -142,7 +143,7 @@ class _Beef extends State<Beef> {
           ),
           Container(
             margin: const EdgeInsets.only(left: 10),
-            height: 229,
+            height: 230,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Expanded(
@@ -151,7 +152,8 @@ class _Beef extends State<Beef> {
                   itemCount: _beef.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _beef[index].strMealThumb!,
                           name_food: _beef[index].strMeal!,
@@ -163,7 +165,7 @@ class _Beef extends State<Beef> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'American Food',
               style: TextStyle(
@@ -174,7 +176,7 @@ class _Beef extends State<Beef> {
           ),
           Container(
             margin: const EdgeInsets.only(left: 10),
-            height: 229,
+            height: 230,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Expanded(
@@ -183,7 +185,8 @@ class _Beef extends State<Beef> {
                   itemCount: _foodAmerican.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodAmerican[index].strMealThumb!,
                           name_food: _foodAmerican[index].strMeal!,
@@ -195,7 +198,7 @@ class _Beef extends State<Beef> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Canada Food',
               style: TextStyle(
@@ -215,7 +218,8 @@ class _Beef extends State<Beef> {
                   itemCount: _foodCanada.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodCanada[index].strMealThumb!,
                           name_food: _foodCanada[index].strMeal!,
@@ -227,7 +231,7 @@ class _Beef extends State<Beef> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Japan Food',
               style: TextStyle(
@@ -247,7 +251,8 @@ class _Beef extends State<Beef> {
                   itemCount: _foodJapan.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodJapan[index].strMealThumb!,
                           name_food: _foodJapan[index].strMeal!,
@@ -259,7 +264,7 @@ class _Beef extends State<Beef> {
             ]),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 25, top: 30, bottom: 19),
+            margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
             child: const Text(
               'Italia Food',
               style: TextStyle(
@@ -279,7 +284,8 @@ class _Beef extends State<Beef> {
                   itemCount: _foodItalia.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.only(left: 15),
+                      margin:
+                          const EdgeInsets.only(left: 15, top: 4, bottom: 4),
                       child: Food_Item(
                           image_food: _foodItalia[index].strMealThumb!,
                           name_food: _foodItalia[index].strMeal!,

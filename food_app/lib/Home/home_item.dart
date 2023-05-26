@@ -20,7 +20,17 @@ class Food_Item extends StatelessWidget {
         width: 266,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color(0xFF40D3D1D8),
+          color: const Color(0xFFFFFFFF),
+          boxShadow: const [
+            BoxShadow(
+                color: Color(0xff40D3D1D8),
+                offset: Offset(
+                  0.0,
+                  0.0,
+                ),
+                blurRadius: 30.0,
+                blurStyle: BlurStyle.outer),
+          ],
         ),
         child: Stack(
           alignment: Alignment.topCenter,
@@ -49,6 +59,7 @@ class Food_Item extends StatelessWidget {
                   Expanded(
                     child: Row(children: [
                       Container(
+                        width: 250,
                         alignment: Alignment.topLeft,
                         padding: const EdgeInsets.only(left: 13, top: 12),
                         child: Text(
