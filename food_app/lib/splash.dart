@@ -30,8 +30,7 @@ class _SplashScreen extends State<SplashScreen> {
             height: 93,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(35),
-                image: DecorationImage(
-                    image: AssetImage('assets/image/logo.png'))),
+                image: DecorationImage(image: AssetImage(AppImages.logo))),
           ),
           SizedBox(
             height: 10,
@@ -40,7 +39,7 @@ class _SplashScreen extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/image/Food.png',
+                AppImages.food,
                 width: 100,
                 height: 50,
               ),
@@ -48,7 +47,7 @@ class _SplashScreen extends State<SplashScreen> {
                 width: 7,
               ),
               Image.asset(
-                'assets/image/Hub.png',
+                AppImages.hub,
                 width: 72,
                 height: 60,
               )

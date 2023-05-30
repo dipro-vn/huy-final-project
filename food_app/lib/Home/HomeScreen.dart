@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
@@ -90,11 +91,11 @@ class _HomeScreen extends State<HomeScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black26),
         centerTitle: true,
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColors.white,
         title: Column(
           children: const [
             Text(
@@ -107,7 +108,7 @@ class _HomeScreen extends State<HomeScreen> {
             Text(
               '5000  Pretty View Lane',
               style: TextStyle(
-                  color: Color.fromARGB(221, 255, 0, 0),
+                  color: Colors.red,
                   fontSize: 15,
                   fontFamily: AppFonts.nunitoSans),
             )
@@ -115,7 +116,7 @@ class _HomeScreen extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -124,8 +125,8 @@ class _HomeScreen extends State<HomeScreen> {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFFFFFFF),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,7 +268,7 @@ class _HomeScreen extends State<HomeScreen> {
             Container(
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                  color: Color(0xFFFE724C),
+                  color: AppColors.orange,
                   borderRadius: BorderRadius.circular(50)),
               margin: const EdgeInsets.only(bottom: 32, left: 22),
               height: 43,
@@ -333,9 +334,9 @@ class _HomeScreen extends State<HomeScreen> {
                         image: DecorationImage(
                             image: AssetImage(AppImages.filter),
                             fit: BoxFit.cover),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
-                            color: Color(0xff40D3D1D8),
+                            color: AppColors.greyshadow,
                             offset: Offset(0, 15),
                             blurRadius: 30,
                           )

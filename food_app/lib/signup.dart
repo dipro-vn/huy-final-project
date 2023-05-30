@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -88,7 +89,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                         fixedSize: Size(width - 80, height / 18),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: Color.fromARGB(165, 235, 60, 60),
+                        backgroundColor: AppColors.orange,
                       ),
                       onPressed: () {
                         SignUp();
@@ -167,8 +168,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 255, 255, 255),
+                                backgroundColor: AppColors.white,
                               ),
                               onPressed: () {},
                               child: FittedBox(
@@ -196,8 +196,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                                 fixedSize: Size((width - 70) / 2, height / 18),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
-                                backgroundColor:
-                                    const Color.fromARGB(255, 255, 255, 255)),
+                                backgroundColor: AppColors.white),
                             onPressed: () {},
                             child: FittedBox(
                               child: Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 
 import '../core/app_fonts.dart';
 import '../core/app_image.dart';
@@ -29,14 +30,13 @@ class _Categories_ItemState extends State<Categories_Item> {
         height: 98,
         width: 58,
         decoration: BoxDecoration(
-            color:
-                widget.select == true ? Color(0xffFE724C) : Color(0xffFFFFFF),
+            color: widget.select == true ? AppColors.orange : AppColors.white,
             borderRadius: BorderRadius.circular(100),
             boxShadow: [
               BoxShadow(
                 color: widget.select == true
-                    ? Color(0xff40FE724C)
-                    : Color(0xff40D3D1D8),
+                    ? AppColors.orangeshadow
+                    : AppColors.greyshadow,
                 offset: Offset(0, 20),
                 blurRadius: 30,
               )

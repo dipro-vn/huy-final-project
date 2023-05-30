@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
 import 'main.dart';
@@ -122,8 +123,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                   fixedSize: Size(140, 55),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(27)),
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 255, 255, 255)),
+                                  backgroundColor: AppColors.white),
                               onPressed: () {},
                               child: FittedBox(
                                 child: Row(
@@ -150,8 +150,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                                   fixedSize: Size(140, 55),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(27)),
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 255, 255, 255)),
+                                  backgroundColor: AppColors.white),
                               onPressed: () {},
                               child: FittedBox(
                                 child: Row(

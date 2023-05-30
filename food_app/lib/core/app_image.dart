@@ -26,4 +26,7 @@ class AppImages {
   static String basket = 'assets/image/basket.png';
   static String power = 'assets/icon/power.png';
   static String back = 'assets/image/back.png';
+  static String logo = 'assets/image/logo.png';
+  static String food = 'assets/image/Food.png';
+  static String hub = 'assets/image/Hub.png';
 }

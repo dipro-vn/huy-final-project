@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/home_item.dart';
+import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
 
@@ -58,7 +59,7 @@ class _DetailScreen extends State<DetailScreen> {
                         margin: const EdgeInsets.only(top: 10, left: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: const Color(0xFFFFFFFF),
+                          color: AppColors.white,
                         ),
                         child: Image.asset(
                           AppImages.back,
@@ -74,9 +75,9 @@ class _DetailScreen extends State<DetailScreen> {
                         borderRadius: BorderRadius.circular(100),
                         color: const Color.fromARGB(255, 210, 200, 200),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         Icons.favorite,
-                        color: Color(0xFFFFFFFF),
+                        color: AppColors.white,
                         size: 20,
                       )),
                 ],
@@ -112,9 +113,9 @@ class _DetailScreen extends State<DetailScreen> {
                 SizedBox(width: 9),
                 TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       'See Review',
-                      style: TextStyle(fontSize: 13, color: Color(0xffFE724C)),
+                      style: TextStyle(fontSize: 13, color: AppColors.orange),
                     )),
               ],
             ),
@@ -128,20 +129,20 @@ class _DetailScreen extends State<DetailScreen> {
                   child: Text(
                     '${(price * quantity + perpep + spinach + masroom)}'
                     'VND',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontSize: 31,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xffFE724C)),
+                        color: AppColors.orange),
                   ),
                 ),
                 Container(
                   child: Row(
                     children: [
                       IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.remove_circle_outline,
                           size: 30,
-                          color: Color(0xffFE724C),
+                          color: AppColors.orange,
                         ),
                         onPressed: () {
                           setState(() {
@@ -161,10 +162,10 @@ class _DetailScreen extends State<DetailScreen> {
                       ),
                       SizedBox(width: 9),
                       IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.add_circle_outlined,
                           size: 30,
-                          color: Color(0xffFE724C),
+                          color: AppColors.orange,
                         ),
                         onPressed: () {
                           setState(() {
@@ -234,14 +235,14 @@ class _DetailScreen extends State<DetailScreen> {
                                     border: Border.all(
                                         width: 2,
                                         color: _perpep == true
-                                            ? Color(0xffFE724C)
-                                            : Color(0xffB2D4D5DA))),
+                                            ? AppColors.orange
+                                            : AppColors.grey)),
                                 child: Icon(
                                   Icons.circle,
                                   size: 15,
                                   color: _perpep == true
-                                      ? Color(0xffFE724C)
-                                      : Color(0xffFFFFFF),
+                                      ? AppColors.orange
+                                      : AppColors.white,
                                 ),
                               ),
                             )
@@ -295,14 +296,14 @@ class _DetailScreen extends State<DetailScreen> {
                                     border: Border.all(
                                         width: 2,
                                         color: _spinach == true
-                                            ? Color(0xffFE724C)
-                                            : Color(0xffB2D4D5DA))),
+                                            ? AppColors.orange
+                                            : AppColors.grey)),
                                 child: Icon(
                                   Icons.circle,
                                   size: 15,
                                   color: _spinach == true
-                                      ? Color(0xffFE724C)
-                                      : Color(0xffFFFFFF),
+                                      ? AppColors.orange
+                                      : AppColors.white,
                                 ),
                               ),
                             )
@@ -353,14 +354,14 @@ class _DetailScreen extends State<DetailScreen> {
                                   border: Border.all(
                                       width: 2,
                                       color: _masroom == true
-                                          ? Color(0xffFE724C)
-                                          : Color(0xffB2D4D5DA))),
+                                          ? AppColors.orange
+                                          : AppColors.grey)),
                               child: Icon(
                                 Icons.circle,
                                 size: 15,
                                 color: _masroom == true
-                                    ? Color(0xffFE724C)
-                                    : Color(0xffFFFFFF),
+                                    ? AppColors.orange
+                                    : AppColors.white,
                               ),
                             ),
                           )
@@ -376,7 +377,7 @@ class _DetailScreen extends State<DetailScreen> {
           Container(
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
-                color: const Color(0xFFFE724C),
+                color: AppColors.orange,
                 borderRadius: BorderRadius.circular(28.5)),
             margin: const EdgeInsets.only(bottom: 32, left: 104, right: 104),
             height: 53,
@@ -390,7 +391,7 @@ class _DetailScreen extends State<DetailScreen> {
                   height: 40,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: Color(0xffFFFFFF)),
+                      color: AppColors.white),
                   child: Image.asset(
                     AppImages.basket,
                     width: 16,
