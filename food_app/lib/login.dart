@@ -81,7 +81,7 @@ class _LoginScreen extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(20)),
                             backgroundColor: Color.fromARGB(165, 235, 60, 60)),
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.popAndPushNamed(
                             context,
                             '/Home',
                           );

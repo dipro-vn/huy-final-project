@@ -20,13 +20,6 @@ class _HomeScreen extends State<HomeScreen> {
   List<Meals> _data = [];
   List<Categories> _categories = [];
   bool isLoading = false;
-  // tao item categorie co id name image
-
-  // click item set categorie
-
-  // categorie => id
-
-  // id == id active ?? ko active
 
   Future<http.Response> getCategories() async {
     return await http.get(
@@ -283,7 +276,7 @@ class _HomeScreen extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Image.asset(
-                    'assets/icon/power.png',
+                    AppImages.power,
                     width: 26,
                     height: 26,
                   ),
@@ -306,6 +299,7 @@ class _HomeScreen extends State<HomeScreen> {
             Container(
               margin: const EdgeInsets.only(top: 19, bottom: 30),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 25, right: 10),
@@ -331,6 +325,7 @@ class _HomeScreen extends State<HomeScreen> {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(right: 10),
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(

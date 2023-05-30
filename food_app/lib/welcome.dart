@@ -186,7 +186,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                               backgroundColor:
                                   const Color.fromARGB(100, 1, 1, 1)),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/Signup');
+                            Navigator.popAndPushNamed(context, '/Signup');
                           },
                           child: FittedBox(
                             child: Text(
@@ -209,7 +209,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/Login');
+                                  Navigator.popAndPushNamed(context, '/Login');
                                 },
                                 child: Text(AppTexts.login))
                           ],

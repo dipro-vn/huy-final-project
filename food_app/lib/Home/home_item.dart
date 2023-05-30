@@ -15,7 +15,13 @@ class Food_Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, '/Detail',
+            arguments: Food_Item(
+                image_food: image_food,
+                name_food: name_food,
+                id_food: id_food));
+      },
       child: Container(
         width: 266,
         decoration: BoxDecoration(

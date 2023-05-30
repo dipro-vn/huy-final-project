@@ -12,4 +12,8 @@ class AppTexts {
   static String forGotPass = 'Forgot password';
   static String notAccount = "Don't have an account?";
   static String find = 'Find for food or res';
+  static String choice = 'Choice of Add On';
+  static String spinach = 'Baby Spinach';
+  static String masroom = 'Masroom';
+  static String addtocard = "Add To Card";
 }

@@ -92,7 +92,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                       ),
                       onPressed: () {
                         SignUp();
-                        Navigator.pushNamed(context, '/Login');
+                        Navigator.popAndPushNamed(context, '/Login');
                       },
                       child: Text(
                         AppTexts.signup,
