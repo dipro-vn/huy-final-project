@@ -20,4 +20,13 @@ class AppImages {
   static String setting = 'assets/icon/Setting.png';
   static String help = 'assets/icon/Helps.png';
   static String filter = 'assets/icon/filter.png';
+  static String pepper = 'assets/image/pepper.png';
+  static String spinach = 'assets/image/spinach.png';
+  static String masroom = 'assets/image/masroom.png';
+  static String basket = 'assets/image/basket.png';
+  static String power = 'assets/icon/power.png';
+  static String back = 'assets/image/back.png';
+  static String logo = 'assets/image/logo.png';
+  static String food = 'assets/image/Food.png';
+  static String hub = 'assets/image/Hub.png';
 }

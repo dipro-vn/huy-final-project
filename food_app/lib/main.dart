@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/HomeScreen.dart';
+import 'package:food_app/detail/detailScreen.dart';
 import 'package:food_app/login.dart';
 import 'package:food_app/signup.dart';
 import 'splash.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         SignUpScreen.routeName: (ctx) => const SignUpScreen(),
         LoginScreen.routeName: (ctx) => const LoginScreen(),
         HomeScreen.routeName: (ctx) => const HomeScreen(),
+        DetailScreen.routeName: (ctx) => const DetailScreen(),
       },
     );
   }

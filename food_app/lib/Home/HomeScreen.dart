@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
@@ -20,13 +21,6 @@ class _HomeScreen extends State<HomeScreen> {
   List<Meals> _data = [];
   List<Categories> _categories = [];
   bool isLoading = false;
-  // tao item categorie co id name image
-
-  // click item set categorie
-
-  // categorie => id
-
-  // id == id active ?? ko active
 
   Future<http.Response> getCategories() async {
     return await http.get(
@@ -97,11 +91,11 @@ class _HomeScreen extends State<HomeScreen> {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.black26),
         centerTitle: true,
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColors.white,
         title: Column(
           children: const [
             Text(
@@ -114,7 +108,7 @@ class _HomeScreen extends State<HomeScreen> {
             Text(
               '5000  Pretty View Lane',
               style: TextStyle(
-                  color: Color.fromARGB(221, 255, 0, 0),
+                  color: Colors.red,
                   fontSize: 15,
                   fontFamily: AppFonts.nunitoSans),
             )
@@ -122,7 +116,7 @@ class _HomeScreen extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -131,8 +125,8 @@ class _HomeScreen extends State<HomeScreen> {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeader(
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFFFFFFF),
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,7 +268,7 @@ class _HomeScreen extends State<HomeScreen> {
             Container(
               alignment: Alignment.centerLeft,
               decoration: BoxDecoration(
-                  color: Color(0xFFFE724C),
+                  color: AppColors.orange,
                   borderRadius: BorderRadius.circular(50)),
               margin: const EdgeInsets.only(bottom: 32, left: 22),
               height: 43,
@@ -283,7 +277,7 @@ class _HomeScreen extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Image.asset(
-                    'assets/icon/power.png',
+                    AppImages.power,
                     width: 26,
                     height: 26,
                   ),
@@ -306,6 +300,7 @@ class _HomeScreen extends State<HomeScreen> {
             Container(
               margin: const EdgeInsets.only(top: 19, bottom: 30),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     margin: const EdgeInsets.only(left: 25, right: 10),
@@ -331,6 +326,7 @@ class _HomeScreen extends State<HomeScreen> {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(right: 10),
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
@@ -338,9 +334,9 @@ class _HomeScreen extends State<HomeScreen> {
                         image: DecorationImage(
                             image: AssetImage(AppImages.filter),
                             fit: BoxFit.cover),
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
-                            color: Color(0xff40D3D1D8),
+                            color: AppColors.greyshadow,
                             offset: Offset(0, 15),
                             blurRadius: 30,
                           )

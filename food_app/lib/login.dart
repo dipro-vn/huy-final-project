@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
 import 'package:http/http.dart' as http;
@@ -79,9 +80,9 @@ class _LoginScreen extends State<LoginScreen> {
                             fixedSize: Size(width - 80, height / 18),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
-                            backgroundColor: Color.fromARGB(165, 235, 60, 60)),
+                            backgroundColor: AppColors.orange),
                         onPressed: () {
-                          Navigator.pushNamed(
+                          Navigator.popAndPushNamed(
                             context,
                             '/Home',
                           );

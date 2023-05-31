@@ -59,24 +59,9 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-  - assets/image/fod.jpg
-  - assets/image/welcome.jpg
-  - assets/icon/fb_icon.png
-  - assets/icon/gg.jpg
-  - assets/icon/Helps.png
-  - assets/icon/Location.png
-  - assets/icon/Message.png
-  - assets/icon/oder.png
-  - assets/icon/power.png
-  - assets/icon/Profile.png
-  - assets/icon/Setting.png
-  - assets/icon/Wallet.png
-  - assets/icon/filter.png
-  - assets/image/avatar.png
-  - assets/image/logo.png
-  - assets/image/Food.png
-  - assets/image/Hub.png
-  
+  - assets/image/
+  - assets/icon/
+ 
 
 
 

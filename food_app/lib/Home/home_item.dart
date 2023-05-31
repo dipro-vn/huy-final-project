@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/core/app_colors.dart';
 
 import '../core/app_fonts.dart';
 
@@ -15,16 +16,22 @@ class Food_Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, '/Detail',
+            arguments: Food_Item(
+                image_food: image_food,
+                name_food: name_food,
+                id_food: id_food));
+      },
       child: Container(
         width: 266,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color(0xFFFFFFFF),
-          boxShadow: const [
+          color: AppColors.white,
+          boxShadow: [
             BoxShadow(
-                color: Color(0xff40D3D1D8),
-                offset: Offset(
+                color: AppColors.greyshadow,
+                offset: const Offset(
                   0.0,
                   0.0,
                 ),
@@ -86,12 +93,12 @@ class Food_Item extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 10, left: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: const Color(0xFFFFFFFF),
+                      color: AppColors.white,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           '4.5',
                           style: TextStyle(
                               fontSize: 11,
@@ -100,10 +107,10 @@ class Food_Item extends StatelessWidget {
                         ),
                         Icon(
                           Icons.star,
-                          color: Color(0xFFFFC529),
+                          color: AppColors.star,
                           size: 12,
                         ),
-                        Text(
+                        const Text(
                           '(25+)',
                           style: TextStyle(
                               fontSize: 8,
@@ -118,11 +125,11 @@ class Food_Item extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 10, right: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: const Color.fromARGB(255, 210, 200, 200),
+                      color: AppColors.greylight,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.favorite,
-                      color: Color(0xFFFFFFFF),
+                      color: AppColors.white,
                       size: 20,
                     )),
               ],
