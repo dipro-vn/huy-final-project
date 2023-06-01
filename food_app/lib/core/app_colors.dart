@@ -8,4 +8,5 @@ class AppColors {
   static Color greyshadow = Color(0xff40D3D1D8);
   static Color greylight = Color(0xff33FFFFFF);
   static Color star = Color(0xFFFFC529);
+  static Color greydask = Color(0xff9796A1);
 }

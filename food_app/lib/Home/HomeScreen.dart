@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:food_app/Home/area.dart';
+import 'package:food_app/Home/component/drawer.dart';
+import 'package:food_app/Home/component/food.dart';
 import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
@@ -18,72 +21,56 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  List<Area> _area = [];
   List<Meals> _data = [];
+  List<Meals> _dataa = [];
+
   List<Categories> _categories = [];
   bool isLoading = false;
 
-  Future<http.Response> getCategories() async {
+  Future<http.Response> getArea() async {
     return await http.get(
-        Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
+        Uri.parse('https://www.themealdb.com/api/json/v1/1/list.php?a=list'));
   }
 
-  Future<void> fetchCategories() async {
-    var result = await getCategories();
+  Future<void> fetchArea() async {
+    var result = await getArea();
     var userMap = jsonDecode(result.body);
-    final List data = userMap["categories"];
+    final List data = userMap["meals"];
     var ctg = data
         .map(
-          (e) => Categories.fromJson(e),
+          (e) => Area.fromJson(e),
         )
         .toList();
     setState(() {
-      _categories = ctg;
+      _area = ctg;
     });
-    if (ctg.isNotEmpty) {
-      fetchData(_categories[0].strCategory ?? '');
-      _categories = _categories.map((e) {
-        if (e == _categories[0]) {
-          return Categories(
-            idCategory: e.idCategory!,
-            strCategoryThumb: e.strCategoryThumb!,
-            strCategory: e.strCategory!,
-            kick: true,
-          );
-        }
-        return Categories(
-          idCategory: e.idCategory!,
-          strCategoryThumb: e.strCategoryThumb!,
-          strCategory: e.strCategory!,
-          kick: false,
-        );
-      }).toList();
-    }
   }
 
-  Future<http.Response> getData(String strMeal) async {
-    return await http.get(Uri.parse(
-        'http://www.themealdb.com/api/json/v1/1/filter.php?c=$strMeal'));
+  Future<http.Response> getDataa(String area) async {
+    return await http.get(
+        Uri.parse('http://www.themealdb.com/api/json/v1/1/filter.php?a=$area'));
   }
 
-  Future<void> fetchData(String name) async {
-    var result = await getData(name);
+  Future<void> fetchDataa(String areaname) async {
+    var result = await getDataa(areaname);
     var userMap = jsonDecode(result.body);
-    final List data = userMap["meals"];
-    var beef = data
+    final List dataa = userMap["meals"];
+    var beef = dataa
         .map(
           (e) => Meals.fromJson(e),
         )
         .toList();
     setState(() {
-      _data = beef;
-      isLoading = true;
+      _dataa = beef;
     });
+    Navigator.pushNamed(context, '/Category', arguments: [_dataa, areaname]);
   }
 
   @override
   void initState() {
     super.initState();
-    fetchCategories();
+    fetchArea();
   }
 
   @override
@@ -115,320 +102,87 @@ class _HomeScreen extends State<HomeScreen> {
           ],
         ),
       ),
-      drawer: Drawer(
-        backgroundColor: AppColors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
+      drawer: DrawerHome(),
+      body: GestureDetector(
+        onTap: () {
+          final FocusScopeNode currentScope = FocusScope.of(context);
+          if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          }
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 19, bottom: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 25, right: 10),
+                      width: 255,
+                      height: 50,
+                      child: TextField(
+                        cursorColor: Color(0xFFFCFCFD),
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            label: Row(
+                              children: [
+                                const Icon(Icons.search),
+                                Text(
+                                  AppTexts.find,
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: AppFonts.nunitoSans),
+                                ),
+                              ],
+                            )),
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 90,
-                          height: 90,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
-                                  image: AssetImage(AppImages.avatar),
-                                  fit: BoxFit.cover)),
-                        ),
-                        const Text(
-                          'Name',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: AppFonts.nunitoSans),
-                        ),
-                        const Text(
-                          'Email',
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: AppFonts.nunitoSans),
-                        )
-                      ],
-                    ),
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.oder,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'My Oders',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.profile,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'My profile',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.location,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'Delivery Adress',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.pay,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'Payment Methods',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.contact,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'Contact Us',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.setting,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'Settings',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                  ListTile(
-                    leading: Image.asset(
-                      AppImages.help,
-                      width: 23,
-                      height: 23,
-                    ),
-                    title: const Text(
-                      'Help & FAQs',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: AppFonts.nunitoSans),
-                    ),
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              decoration: BoxDecoration(
-                  color: AppColors.orange,
-                  borderRadius: BorderRadius.circular(50)),
-              margin: const EdgeInsets.only(bottom: 32, left: 22),
-              height: 43,
-              width: 117,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset(
-                    AppImages.power,
-                    width: 26,
-                    height: 26,
-                  ),
-                  const Text(
-                    "Log Out",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: AppFonts.nunitoSans),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 19, bottom: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 25, right: 10),
-                    width: 255,
-                    height: 50,
-                    child: TextField(
-                      cursorColor: Color(0xFFFCFCFD),
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: Row(
-                            children: [
-                              const Icon(Icons.search),
-                              Text(
-                                AppTexts.find,
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: AppFonts.nunitoSans),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        image: DecorationImage(
-                            image: AssetImage(AppImages.filter),
-                            fit: BoxFit.cover),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.greyshadow,
-                            offset: Offset(0, 15),
-                            blurRadius: 30,
-                          )
-                        ]),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 110,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        fetchData(_categories[index].strCategory!);
-                        _categories = _categories.map((e) {
-                          if (e == _categories[index]) {
-                            return Categories(
-                              idCategory: e.idCategory!,
-                              strCategoryThumb: e.strCategoryThumb!,
-                              strCategory: e.strCategory!,
-                              kick: true,
-                            );
-                          }
-                          return Categories(
-                            idCategory: e.idCategory!,
-                            strCategoryThumb: e.strCategoryThumb!,
-                            strCategory: e.strCategory!,
-                            kick: false,
-                          );
-                        }).toList();
-                      });
-                    },
-                    child: Categories_Item(
-                      image: _categories[index].strCategoryThumb!,
-                      name: _categories[index].strCategory!,
-                      id: _categories[index].idCategory!,
-                      select: _categories[index].kick ?? false,
-                    ),
-                  );
-                },
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 25, top: 25, bottom: 10),
-                  child: const Text(
-                    'Food',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        fontFamily: AppFonts.nunitoSans),
-                  ),
+                    Container(
+                      margin: EdgeInsets.only(right: 10),
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          image: DecorationImage(
+                              image: AssetImage(AppImages.filter),
+                              fit: BoxFit.cover),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.greyshadow,
+                              offset: Offset(0, 15),
+                              blurRadius: 30,
+                            )
+                          ]),
+                    )
+                  ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  height: 230,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: _data.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                margin: const EdgeInsets.only(
-                                    left: 15, top: 5, bottom: 5),
-                                child: Food_Item(
-                                    image_food: _data[index].strMealThumb!,
-                                    name_food: _data[index].strMeal!,
-                                    id_food: _data[index].idMeal!),
-                              );
-                            },
-                          ),
-                        )
-                      ]),
-                ),
-                const SizedBox(
-                  height: 5,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 5,
-            )
-          ],
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 5, bottom: 15, top: 5),
+                height: 30,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _area.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              fetchDataa(_area[index].strArea!);
+                            });
+                          },
+                          child: Area_Item(name: _area[index].strArea!));
+                    }),
+              ),
+              FoodHome(),
+              const SizedBox(
+                height: 5,
+              )
+            ],
+          ),
         ),
       ),
     );

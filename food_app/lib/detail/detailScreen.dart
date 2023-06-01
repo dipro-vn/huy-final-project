@@ -34,8 +34,8 @@ class _DetailScreen extends State<DetailScreen> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(right: 27, left: 25, top: 27),
-            width: 340,
+            margin: EdgeInsets.only(right: 27, left: 20, top: 27),
+            width: 400,
             height: 210,
             child: Stack(children: [
               Container(
@@ -219,6 +219,9 @@ class _DetailScreen extends State<DetailScreen> {
                               style: TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400),
                             ),
+                            SizedBox(
+                              width: 5,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -275,9 +278,14 @@ class _DetailScreen extends State<DetailScreen> {
                       Container(
                         child: Row(
                           children: [
-                            Text('+4.70',
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w400)),
+                            Text(
+                              '+4.70',
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
@@ -327,7 +335,7 @@ class _DetailScreen extends State<DetailScreen> {
                             ),
                             Text(
                               AppTexts.masroom,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w400),
                             )
                           ],
@@ -335,9 +343,14 @@ class _DetailScreen extends State<DetailScreen> {
                       ),
                       Row(
                         children: [
-                          Text('+2.50',
-                              style: TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w400)),
+                          const Text(
+                            '+2.50',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w400),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -400,7 +413,7 @@ class _DetailScreen extends State<DetailScreen> {
                 ),
                 Text(
                   AppTexts.addtocard,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       fontFamily: AppFonts.nunitoSans),
