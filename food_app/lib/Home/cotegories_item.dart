@@ -24,40 +24,44 @@ class _Categories_ItemState extends State<Categories_Item> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        margin: const EdgeInsets.only(right: 5, left: 15, top: 5, bottom: 5),
-        alignment: Alignment.center,
-        height: 98,
-        width: 58,
-        decoration: BoxDecoration(
-            color: widget.select == true ? AppColors.orange : AppColors.white,
-            borderRadius: BorderRadius.circular(100),
-            boxShadow: [
-              BoxShadow(
-                color: widget.select == true
-                    ? AppColors.orangeshadow
-                    : AppColors.greyshadow,
-                offset: Offset(0, 20),
-                blurRadius: 30,
-              )
-            ]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.network(
-              widget.image,
-              width: 50,
-              height: 50,
-            ),
-            Text(
-              widget.name,
-              style: TextStyle(
-                  color: widget.select == true ? Colors.white : Colors.black,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: AppFonts.nunitoSans),
-            ),
-          ],
+      child: Center(
+        child: Container(
+          padding: EdgeInsets.only(right: 2, left: 2),
+          margin: const EdgeInsets.only(right: 5, left: 15, top: 5, bottom: 5),
+          alignment: Alignment.center,
+          height: 98,
+          width: 58,
+          decoration: BoxDecoration(
+              color: widget.select == true ? AppColors.orange : AppColors.white,
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [
+                BoxShadow(
+                  color: widget.select == true
+                      ? AppColors.orangeshadow
+                      : AppColors.greyshadow,
+                  offset: Offset(0, 20),
+                  blurRadius: 30,
+                )
+              ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.network(
+                widget.image,
+                width: 50,
+                height: 50,
+              ),
+              Text(
+                widget.name,
+                style: TextStyle(
+                    color: widget.select == true ? Colors.white : Colors.black,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: AppFonts.nunitoSans,
+                    overflow: TextOverflow.ellipsis),
+              ),
+            ],
+          ),
         ),
       ),
     );
