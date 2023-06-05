@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/home_item.dart';
+import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
@@ -22,9 +23,9 @@ class _DetailScreen extends State<DetailScreen> {
   bool _masroom = false;
   var price = 9.5;
   var quantity = 1;
-  num perpep = 0;
-  num spinach = 0;
-  num masroom = 0;
+  num perpep = 2.3;
+  num spinach = 4.7;
+  num masroom = 2.5;
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as Food_Item;
@@ -127,7 +128,7 @@ class _DetailScreen extends State<DetailScreen> {
               children: [
                 Container(
                   child: Text(
-                    '${(price * quantity + perpep + spinach + masroom)}'
+                    '${(price)}'
                     'VND',
                     style: TextStyle(
                         fontSize: 31,
@@ -148,6 +149,7 @@ class _DetailScreen extends State<DetailScreen> {
                           setState(() {
                             if (quantity > 1) {
                               quantity = quantity - 1;
+                              price = price - 9.5;
                             } else {
                               quantity = quantity;
                             }
@@ -170,6 +172,7 @@ class _DetailScreen extends State<DetailScreen> {
                         onPressed: () {
                           setState(() {
                             quantity = quantity + 1;
+                            price = price + 9.5;
                           });
                         },
                       ),
@@ -226,7 +229,9 @@ class _DetailScreen extends State<DetailScreen> {
                               onTap: () {
                                 setState(() {
                                   _perpep = !_perpep;
-                                  _perpep == true ? perpep = 2.30 : perpep = 0;
+                                  _perpep == true
+                                      ? price = price + perpep
+                                      : price = price - perpep;
                                 });
                               },
                               child: Container(
@@ -291,8 +296,8 @@ class _DetailScreen extends State<DetailScreen> {
                                 setState(() {
                                   _spinach = !_spinach;
                                   _spinach == true
-                                      ? spinach = 4.70
-                                      : spinach = 0;
+                                      ? price = price + spinach
+                                      : price = price - spinach;
                                 });
                               },
                               child: Container(
@@ -344,7 +349,7 @@ class _DetailScreen extends State<DetailScreen> {
                       Row(
                         children: [
                           const Text(
-                            '+2.50',
+                            '+2.5',
                             style: TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w400),
                           ),
@@ -355,7 +360,9 @@ class _DetailScreen extends State<DetailScreen> {
                             onTap: () {
                               setState(() {
                                 _masroom = !_masroom;
-                                _masroom == true ? masroom = 2.5 : masroom = 0;
+                                _masroom == true
+                                    ? price = price + masroom
+                                    : price = price - masroom;
                               });
                             },
                             child: Container(
@@ -387,38 +394,48 @@ class _DetailScreen extends State<DetailScreen> {
             ),
           ),
           const Expanded(child: SizedBox()),
-          Container(
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-                color: AppColors.orange,
-                borderRadius: BorderRadius.circular(28.5)),
-            margin: const EdgeInsets.only(bottom: 32, left: 104, right: 104),
-            height: 53,
-            width: 167,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: AppColors.white),
-                  child: Image.asset(
-                    AppImages.basket,
-                    width: 16,
-                    height: 17,
+          GestureDetector(
+            onTap: () {
+              cart.add(Cart(
+                  image: args.image_food,
+                  name: args.name_food,
+                  price: price,
+                  quantity: quantity));
+              Navigator.pushNamed(context, '/Cart');
+            },
+            child: Container(
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                  color: AppColors.orange,
+                  borderRadius: BorderRadius.circular(28.5)),
+              margin: const EdgeInsets.only(bottom: 32, left: 104, right: 104),
+              height: 53,
+              width: 167,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: AppColors.white),
+                    child: Image.asset(
+                      AppImages.basket,
+                      width: 16,
+                      height: 17,
+                    ),
                   ),
-                ),
-                Text(
-                  AppTexts.addtocard,
-                  style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: AppFonts.nunitoSans),
-                )
-              ],
+                  Text(
+                    AppTexts.addtocard,
+                    style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: AppFonts.nunitoSans),
+                  )
+                ],
+              ),
             ),
           )
         ],
