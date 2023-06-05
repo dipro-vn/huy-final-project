@@ -44,7 +44,7 @@ class _FoodRandom extends State<FoodRandom> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading == true
+    return isLoading
         ? CircularProgressIndicator()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,

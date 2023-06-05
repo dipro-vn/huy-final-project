@@ -55,11 +55,6 @@ class _Cart_Item extends State<Cart_Item> {
               ],
             ),
           ),
-          Container(
-            child: Column(
-              children: [Row()],
-            ),
-          ),
         ],
       ),
     );

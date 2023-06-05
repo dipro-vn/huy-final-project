@@ -119,10 +119,9 @@ class _CartScreen extends State<CartScreen> {
                               });
                             },
                             child: Container(
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/image/slashes.png'))),
+                                      image: AssetImage(AppImages.slashes))),
                               margin: EdgeInsets.only(left: 70),
                               width: 14,
                               height: 14,

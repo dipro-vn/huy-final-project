@@ -229,7 +229,7 @@ class _DetailScreen extends State<DetailScreen> {
                               onTap: () {
                                 setState(() {
                                   _perpep = !_perpep;
-                                  _perpep == true
+                                  _perpep
                                       ? price = price + perpep
                                       : price = price - perpep;
                                 });
@@ -242,13 +242,13 @@ class _DetailScreen extends State<DetailScreen> {
                                     borderRadius: BorderRadius.circular(100),
                                     border: Border.all(
                                         width: 2,
-                                        color: _perpep == true
+                                        color: _perpep
                                             ? AppColors.orange
                                             : AppColors.grey)),
                                 child: Icon(
                                   Icons.circle,
                                   size: 15,
-                                  color: _perpep == true
+                                  color: _perpep
                                       ? AppColors.orange
                                       : AppColors.white,
                                 ),
@@ -295,7 +295,7 @@ class _DetailScreen extends State<DetailScreen> {
                               onTap: () {
                                 setState(() {
                                   _spinach = !_spinach;
-                                  _spinach == true
+                                  _spinach
                                       ? price = price + spinach
                                       : price = price - spinach;
                                 });
@@ -308,13 +308,13 @@ class _DetailScreen extends State<DetailScreen> {
                                     borderRadius: BorderRadius.circular(100),
                                     border: Border.all(
                                         width: 2,
-                                        color: _spinach == true
+                                        color: _spinach
                                             ? AppColors.orange
                                             : AppColors.grey)),
                                 child: Icon(
                                   Icons.circle,
                                   size: 15,
-                                  color: _spinach == true
+                                  color: _spinach
                                       ? AppColors.orange
                                       : AppColors.white,
                                 ),
@@ -360,7 +360,7 @@ class _DetailScreen extends State<DetailScreen> {
                             onTap: () {
                               setState(() {
                                 _masroom = !_masroom;
-                                _masroom == true
+                                _masroom
                                     ? price = price + masroom
                                     : price = price - masroom;
                               });
@@ -373,13 +373,13 @@ class _DetailScreen extends State<DetailScreen> {
                                   borderRadius: BorderRadius.circular(100),
                                   border: Border.all(
                                       width: 2,
-                                      color: _masroom == true
+                                      color: _masroom
                                           ? AppColors.orange
                                           : AppColors.grey)),
                               child: Icon(
                                 Icons.circle,
                                 size: 15,
-                                color: _masroom == true
+                                color: _masroom
                                     ? AppColors.orange
                                     : AppColors.white,
                               ),
