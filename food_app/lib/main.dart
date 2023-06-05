@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/HomeScreen.dart';
+import 'package:food_app/cart/CartScreen.dart';
+import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/category/CategoryScreen.dart';
 import 'package:food_app/detail/detailScreen.dart';
 import 'package:food_app/login.dart';
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (ctx) => const LoginScreen(),
         HomeScreen.routeName: (ctx) => const HomeScreen(),
         DetailScreen.routeName: (ctx) => const DetailScreen(),
-        CategoryScreen.routeName: (ctx) => const CategoryScreen()
+        CategoryScreen.routeName: (ctx) => const CategoryScreen(),
+        CartScreen.routeName: (ctx) => CartScreen(cart: cart)
       },
     );
   }

@@ -16,4 +16,5 @@ class AppTexts {
   static String spinach = 'Baby Spinach';
   static String masroom = 'Masroom';
   static String addtocard = "Add To Card";
+  static String slashes = 'assets/image/slashes.png';
 }

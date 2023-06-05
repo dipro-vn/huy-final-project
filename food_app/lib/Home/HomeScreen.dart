@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app/Home/area.dart';
 import 'package:food_app/Home/component/drawer.dart';
 import 'package:food_app/Home/component/food.dart';
+import 'package:food_app/Home/component/random.dart';
 import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_fonts.dart';
 import 'package:food_app/core/app_image.dart';
@@ -103,6 +104,11 @@ class _HomeScreen extends State<HomeScreen> {
         ),
       ),
       drawer: DrawerHome(),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/Cart');
+          },
+          child: Icon(Icons.shopping_cart)),
       body: GestureDetector(
         onTap: () {
           final FocusScopeNode currentScope = FocusScope.of(context);
@@ -180,7 +186,8 @@ class _HomeScreen extends State<HomeScreen> {
               FoodHome(),
               const SizedBox(
                 height: 5,
-              )
+              ),
+              FoodRandom(),
             ],
           ),
         ),
