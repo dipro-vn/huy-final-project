@@ -80,6 +80,23 @@ class DrawerHome extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Image.asset(
+                    AppImages.profile,
+                    width: 23,
+                    height: 23,
+                  ),
+                  title: const Text(
+                    'My favorite',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: AppFonts.nunitoSans),
+                  ),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Favorite');
+                  },
+                ),
+                ListTile(
+                  leading: Image.asset(
                     AppImages.location,
                     width: 23,
                     height: 23,

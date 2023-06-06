@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/core/app_colors.dart';
+import 'package:food_app/favorite/list_favorite.dart';
 
 import '../core/app_fonts.dart';
 
-class Food_Item extends StatelessWidget {
+class Food_Item extends StatefulWidget {
   Food_Item({
     required this.image_food,
     required this.name_food,
     required this.id_food,
+    required this.favorite,
   });
   String image_food;
   String name_food;
   String id_food;
+  bool favorite;
 
+  @override
+  State<Food_Item> createState() => _Food_ItemState();
+}
+
+class _Food_ItemState extends State<Food_Item> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/Detail',
             arguments: Food_Item(
-                image_food: image_food,
-                name_food: name_food,
-                id_food: id_food));
+              image_food: widget.image_food,
+              name_food: widget.name_food,
+              id_food: widget.id_food,
+              favorite: widget.favorite,
+            ));
       },
       child: Container(
         width: 266,
@@ -46,9 +56,11 @@ class Food_Item extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(context, '/Detail',
                     arguments: Food_Item(
-                        image_food: image_food,
-                        name_food: name_food,
-                        id_food: id_food));
+                      image_food: widget.image_food,
+                      name_food: widget.name_food,
+                      id_food: widget.id_food,
+                      favorite: widget.favorite,
+                    ));
               },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -58,7 +70,7 @@ class Food_Item extends StatelessWidget {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: NetworkImage(
-                              image_food,
+                              widget.image_food,
                             ),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(20)),
@@ -70,7 +82,7 @@ class Food_Item extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         padding: const EdgeInsets.only(left: 13, top: 12),
                         child: Text(
-                          name_food,
+                          widget.name_food,
                           overflow: TextOverflow.clip,
                           maxLines: 2,
                           style: const TextStyle(
@@ -119,19 +131,36 @@ class Food_Item extends StatelessWidget {
                         ),
                       ],
                     )),
-                Container(
-                    height: 28,
-                    width: 28,
-                    margin: const EdgeInsets.only(top: 10, right: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: AppColors.greylight,
-                    ),
-                    child: Icon(
-                      Icons.favorite,
-                      color: AppColors.white,
-                      size: 20,
-                    )),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      widget.favorite = !widget.favorite;
+                    });
+                    if (widget.favorite == true) {
+                      favorite.add(Favorite(
+                          image: widget.image_food,
+                          name: widget.name_food,
+                          favorite: widget.favorite));
+                    } else
+                      favorite
+                          .removeWhere((item) => item.name == widget.name_food);
+                  },
+                  child: Container(
+                      height: 28,
+                      width: 28,
+                      margin: const EdgeInsets.only(top: 10, right: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: widget.favorite == true
+                            ? AppColors.orange
+                            : AppColors.greylight,
+                      ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: AppColors.white,
+                        size: 20,
+                      )),
+                ),
               ],
             ),
           ],

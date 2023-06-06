@@ -76,7 +76,7 @@ class _FoodRandom extends State<FoodRandom> {
                               child: Food_Item(
                                   image_food: _daataa[index].strMealThumb!,
                                   name_food: _daataa[index].strMeal!,
-                                  id_food: _daataa[index].idMeal!),
+                                  id_food: _daataa[index].idMeal!, favorite: false,),
                             );
                           },
                         ),

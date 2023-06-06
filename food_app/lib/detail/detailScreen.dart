@@ -6,6 +6,7 @@ import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/core/app_colors.dart';
 import 'package:food_app/core/app_image.dart';
 import 'package:food_app/core/app_text.dart';
+import 'package:food_app/favorite/list_favorite.dart';
 
 import '../core/app_fonts.dart';
 
@@ -68,19 +69,36 @@ class _DetailScreen extends State<DetailScreen> {
                           height: 9.5,
                         )),
                   ),
-                  Container(
-                      height: 28,
-                      width: 28,
-                      margin: const EdgeInsets.only(top: 10, right: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: const Color.fromARGB(255, 210, 200, 200),
-                      ),
-                      child: Icon(
-                        Icons.favorite,
-                        color: AppColors.white,
-                        size: 20,
-                      )),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        args.favorite = !args.favorite;
+                        if (args.favorite == true) {
+                          favorite.add(Favorite(
+                              image: args.image_food,
+                              name: args.name_food,
+                              favorite: args.favorite));
+                        } else
+                          favorite.removeWhere(
+                              (item) => item.name == args.name_food);
+                      });
+                    },
+                    child: Container(
+                        height: 28,
+                        width: 28,
+                        margin: const EdgeInsets.only(top: 10, right: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: args.favorite == true
+                              ? AppColors.orange
+                              : const Color.fromARGB(255, 210, 200, 200),
+                        ),
+                        child: Icon(
+                          Icons.favorite,
+                          color: AppColors.white,
+                          size: 20,
+                        )),
+                  ),
                 ],
               ),
             ]),
