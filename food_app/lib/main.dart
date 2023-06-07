@@ -4,6 +4,8 @@ import 'package:food_app/cart/CartScreen.dart';
 import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/category/CategoryScreen.dart';
 import 'package:food_app/detail/detailScreen.dart';
+import 'package:food_app/favorite/favoriteScreen.dart';
+import 'package:food_app/favorite/list_favorite.dart';
 import 'package:food_app/login.dart';
 import 'package:food_app/signup.dart';
 import 'splash.dart';
@@ -29,7 +31,8 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (ctx) => const HomeScreen(),
         DetailScreen.routeName: (ctx) => const DetailScreen(),
         CategoryScreen.routeName: (ctx) => const CategoryScreen(),
-        CartScreen.routeName: (ctx) => CartScreen(cart: cart)
+        CartScreen.routeName: (ctx) => CartScreen(cart: cart),
+        FavoriteScreen.routeName: (ctx) => FavoriteScreen(favorite: favorite)
       },
     );
   }

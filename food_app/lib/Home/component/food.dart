@@ -156,9 +156,11 @@ class _FoodHomeState extends State<FoodHome> {
                                   margin: const EdgeInsets.only(
                                       left: 15, top: 5, bottom: 5),
                                   child: Food_Item(
-                                      image_food: _data[index].strMealThumb!,
-                                      name_food: _data[index].strMeal!,
-                                      id_food: _data[index].idMeal!),
+                                    image_food: _data[index].strMealThumb ?? '',
+                                    name_food: _data[index].strMeal ?? '',
+                                    id_food: _data[index].idMeal ?? '',
+                                    favorite: false,
+                                  ),
                                 );
                               },
                             ),
