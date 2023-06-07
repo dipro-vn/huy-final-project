@@ -7,6 +7,7 @@ import 'package:food_app/detail/detailScreen.dart';
 import 'package:food_app/favorite/favoriteScreen.dart';
 import 'package:food_app/favorite/list_favorite.dart';
 import 'package:food_app/login.dart';
+import 'package:food_app/profile/profileScreen.dart';
 import 'package:food_app/signup.dart';
 import 'splash.dart';
 import 'welcome.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         DetailScreen.routeName: (ctx) => const DetailScreen(),
         CategoryScreen.routeName: (ctx) => const CategoryScreen(),
         CartScreen.routeName: (ctx) => CartScreen(cart: cart),
-        FavoriteScreen.routeName: (ctx) => FavoriteScreen(favorite: favorite)
+        FavoriteScreen.routeName: (ctx) => FavoriteScreen(favorite: favorite),
+        ProfileScreen.routeName: (ctx) => ProfileScreen(),
       },
     );
   }

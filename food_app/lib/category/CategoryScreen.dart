@@ -51,7 +51,9 @@ class _CategoryScreen extends State<CategoryScreen> {
                             alignment: Alignment.center,
                             height: 38,
                             width: 38,
-                            margin: const EdgeInsets.only(top: 10, left: 10),
+                            margin: const EdgeInsets.only(
+                              top: 10,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: AppColors.white,
