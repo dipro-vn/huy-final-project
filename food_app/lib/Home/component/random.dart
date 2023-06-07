@@ -74,9 +74,11 @@ class _FoodRandom extends State<FoodRandom> {
                               margin: const EdgeInsets.only(
                                   left: 15, top: 5, bottom: 5),
                               child: Food_Item(
-                                  image_food: _daataa[index].strMealThumb!,
-                                  name_food: _daataa[index].strMeal!,
-                                  id_food: _daataa[index].idMeal!, favorite: false,),
+                                image_food: _daataa[index].strMealThumb ?? '',
+                                name_food: _daataa[index].strMeal ?? '',
+                                id_food: _daataa[index].idMeal ?? '',
+                                favorite: false,
+                              ),
                             );
                           },
                         ),

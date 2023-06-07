@@ -139,9 +139,9 @@ class _CategoryScreen extends State<CategoryScreen> {
                           margin: const EdgeInsets.only(bottom: 20),
                           height: 250,
                           child: Category_Item(
-                            image_food: args[0][index].strMealThumb!,
-                            name_food: args[0][index].strMeal!,
-                            id_food: args[0][index].idMeal!,
+                            image_food: args[0][index].strMealThumb,
+                            name_food: args[0][index].strMeal,
+                            id_food: args[0][index].idMeal,
                             favorite: false,
                           ),
                         );

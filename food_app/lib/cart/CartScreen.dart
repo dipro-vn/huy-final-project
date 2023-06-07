@@ -141,10 +141,10 @@ class _CartScreen extends State<CartScreen> {
                           Container(
                             margin: EdgeInsets.only(left: 22),
                             child: Cart_Item(
-                                image: _carts[index].image!,
-                                name: _carts[index].name!,
-                                price: _carts[index].price!,
-                                quantity: _carts[index].quantity!),
+                                image: _carts[index].image ?? '',
+                                name: _carts[index].name ?? '',
+                                price: _carts[index].price ?? 0,
+                                quantity: _carts[index].quantity ?? 0),
                           ),
                           Container(
                             height: 70,
