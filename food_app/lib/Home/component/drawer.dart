@@ -76,11 +76,13 @@ class DrawerHome extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontFamily: AppFonts.nunitoSans),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Profile');
+                  },
                 ),
                 ListTile(
                   leading: Image.asset(
-                    AppImages.profile,
+                    AppImages.favorite,
                     width: 23,
                     height: 23,
                   ),
@@ -108,7 +110,9 @@ class DrawerHome extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontFamily: AppFonts.nunitoSans),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, 'Address');
+                  },
                 ),
                 ListTile(
                   leading: Image.asset(
@@ -173,30 +177,35 @@ class DrawerHome extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-                color: AppColors.orange,
-                borderRadius: BorderRadius.circular(50)),
-            margin: const EdgeInsets.only(bottom: 32, left: 22),
-            height: 43,
-            width: 117,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Image.asset(
-                  AppImages.power,
-                  width: 26,
-                  height: 26,
-                ),
-                const Text(
-                  "Log Out",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: AppFonts.nunitoSans),
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.popAndPushNamed(context, '/Login');
+            },
+            child: Container(
+              alignment: Alignment.centerLeft,
+              decoration: BoxDecoration(
+                  color: AppColors.orange,
+                  borderRadius: BorderRadius.circular(50)),
+              margin: const EdgeInsets.only(bottom: 32, left: 22),
+              height: 43,
+              width: 117,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset(
+                    AppImages.power,
+                    width: 26,
+                    height: 26,
+                  ),
+                  const Text(
+                    "Log Out",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: AppFonts.nunitoSans),
+                  )
+                ],
+              ),
             ),
           )
         ],
