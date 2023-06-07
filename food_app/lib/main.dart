@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/HomeScreen.dart';
+import 'package:food_app/address/addressScreen.dart';
 import 'package:food_app/cart/CartScreen.dart';
 import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/category/CategoryScreen.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         CartScreen.routeName: (ctx) => CartScreen(cart: cart),
         FavoriteScreen.routeName: (ctx) => FavoriteScreen(favorite: favorite),
         ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        AddressScreen.routeName: (ctx) => AddressScreen()
       },
     );
   }
