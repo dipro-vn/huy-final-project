@@ -78,36 +78,40 @@ class _ReviewScreenState extends State<ReviewScreen> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 30, left: 20, right: 20),
-                child: TextField(
-                  controller: review,
-                  decoration: InputDecoration(
-                      hintText: 'Write your review',
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: TextButton(
-                      onPressed: () {
-                        setState(() {
-                          if (review.text.length != 0) {
-                            _reviews.add(
-                                Review(review.text, "Name", AppImages.avatar));
-                            reviews.clear();
-                            reviews.addAll(_reviews);
-                            review.clear();
-                          }
-                        });
-                      },
-                      child: Text('Send'),
-                    ),
+                margin:
+                    EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
+                child: Stack(children: [
+                  TextField(
+                    controller: review,
+                    decoration: InputDecoration(
+                        hintText: 'Write your review',
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10))),
                   ),
-                ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 5, top: 5),
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (review.text.length != 0) {
+                                _reviews.add(Review(
+                                    review.text, "Name", AppImages.avatar));
+                                reviews.clear();
+                                reviews.addAll(_reviews);
+                                review.clear();
+                              }
+                            });
+                          },
+                          icon: Icon(Icons.send),
+                        ),
+                      ),
+                    ],
+                  ),
+                ]),
               ),
               ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
