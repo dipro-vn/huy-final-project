@@ -115,9 +115,15 @@ class _DetailScreen extends State<DetailScreen> {
             padding: EdgeInsets.only(left: 22),
             child: Row(
               children: [
-                const Icon(
-                  Icons.star,
-                  size: 17,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Rating');
+                  },
+                  child: const Icon(
+                    Icons.star,
+                    size: 17,
+                    color: Colors.yellow,
+                  ),
                 ),
                 SizedBox(width: 8),
                 const Text(

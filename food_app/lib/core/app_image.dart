@@ -32,4 +32,6 @@ class AppImages {
   static String category = 'assets/image/ctgr.jpg';
   static String slashes = 'assets/image/slashes.png';
   static String favorite = 'assets/icon/favorite.png';
+  static String ratingimg = 'assets/image/ratingimg.png';
+  static String hut = "assets/image/hutimg.png";
 }
