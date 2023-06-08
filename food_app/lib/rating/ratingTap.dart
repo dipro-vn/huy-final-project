@@ -16,7 +16,7 @@ class _RatingTapState extends State<RatingTap> {
           margin: EdgeInsets.only(top: 25),
           child: Text(
             display,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 20, fontWeight: FontWeight.w600, color: Colors.red),
           ),
         ),
