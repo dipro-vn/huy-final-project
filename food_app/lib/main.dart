@@ -12,6 +12,7 @@ import 'package:food_app/profile/profileScreen.dart';
 import 'package:food_app/rating/ratingScreen.dart';
 import 'package:food_app/review/ReviewScreen.dart';
 import 'package:food_app/review/list_review.dart';
+import 'package:food_app/review_restaurent/Review_Restaurent.dart';
 import 'package:food_app/signup.dart';
 import 'splash.dart';
 import 'welcome.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
         ProfileScreen.routeName: (ctx) => ProfileScreen(),
         AddressScreen.routeName: (ctx) => AddressScreen(),
         RatingScreen.routeName: (ctx) => RatingScreen(),
-        ReviewScreen.routeName: (ctx) => ReviewScreen(reviews: reviews)
+        ReviewScreen.routeName: (ctx) => ReviewScreen(reviews: reviews),
+        ReviewRestaurent.routeName: (ctx) => ReviewRestaurent(),
       },
     );
   }
