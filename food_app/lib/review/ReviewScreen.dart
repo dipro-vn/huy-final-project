@@ -77,41 +77,25 @@ class _ReviewScreenState extends State<ReviewScreen> {
                   ],
                 ),
               ),
-              Container(
-                margin:
-                    EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
-                child: Stack(children: [
-                  TextField(
-                    controller: review,
-                    decoration: InputDecoration(
-                        hintText: 'Write your review',
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/Review_restaurent');
+                },
+                child: Container(
+                  margin:
+                      EdgeInsets.only(bottom: 30, top: 20, right: 25, left: 25),
+                  padding: EdgeInsets.only(left: 15),
+                  alignment: Alignment.centerLeft,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.black),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 5, top: 5),
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (review.text.length != 0) {
-                                _reviews.add(Review(
-                                    review.text, "Name", AppImages.avatar));
-                                reviews.clear();
-                                reviews.addAll(_reviews);
-                                review.clear();
-                              }
-                            });
-                          },
-                          icon: Icon(Icons.send),
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    'Write your review ...',
+                    style: TextStyle(color: AppColors.grey),
                   ),
-                ]),
+                ),
               ),
               ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
