@@ -137,7 +137,9 @@ class _DetailScreen extends State<DetailScreen> {
                 ),
                 SizedBox(width: 9),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/Review');
+                    },
                     child: Text(
                       'See Review',
                       style: TextStyle(fontSize: 13, color: AppColors.orange),
