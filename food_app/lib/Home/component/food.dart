@@ -82,6 +82,18 @@ class _FoodHomeState extends State<FoodHome> {
     fetchCategories();
   }
 
+  void _animateToIndex(int index) {
+    final contentSize = _controller.position.viewportDimension +
+        _controller.position.maxScrollExtent;
+    final index = 0;
+    final target = contentSize * index;
+    _controller.position.animateTo(
+      target,
+      duration: const Duration(milliseconds: 1),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,12 +101,12 @@ class _FoodHomeState extends State<FoodHome> {
         SizedBox(
           height: 110,
           child: ListView.builder(
-            controller: _controller,
             scrollDirection: Axis.horizontal,
             itemCount: _categories.length,
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
+                  _animateToIndex(0);
                   setState(() {
                     fetchData(_categories[index].strCategory!);
                     _categories = _categories.map((e) {
@@ -149,6 +161,7 @@ class _FoodHomeState extends State<FoodHome> {
                         children: [
                           Expanded(
                             child: ListView.builder(
+                              controller: _controller,
                               scrollDirection: Axis.horizontal,
                               itemCount: _data.length,
                               itemBuilder: (BuildContext context, int index) {

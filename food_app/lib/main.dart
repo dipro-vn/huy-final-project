@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/HomeScreen.dart';
+import 'package:food_app/Oder/List_Oder.dart';
+import 'package:food_app/Oder/OderScreen.dart';
+import 'package:food_app/Oder/Detail_Oder.dart';
 import 'package:food_app/address/addressScreen.dart';
 import 'package:food_app/cart/CartScreen.dart';
 import 'package:food_app/cart/List_cart.dart';
@@ -44,6 +47,8 @@ class MyApp extends StatelessWidget {
         RatingScreen.routeName: (ctx) => RatingScreen(),
         ReviewScreen.routeName: (ctx) => ReviewScreen(reviews: reviews),
         ReviewRestaurent.routeName: (ctx) => ReviewRestaurent(),
+        OderScreen.routeName: (ctx) => const OderScreen(),
+        DetailOder.routeName: (ctx) => const DetailOder(),
       },
     );
   }

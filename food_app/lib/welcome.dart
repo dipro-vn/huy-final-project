@@ -185,7 +185,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                               backgroundColor:
                                   const Color.fromARGB(100, 1, 1, 1)),
                           onPressed: () {
-                            Navigator.popAndPushNamed(context, '/Signup');
+                            Navigator.popAndPushNamed(context, '/Login');
                           },
                           child: FittedBox(
                             child: Text(
@@ -203,14 +203,14 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              AppTexts.haveAccount,
+                              AppTexts.notAccount,
                               style: const TextStyle(color: Colors.white),
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Navigator.popAndPushNamed(context, '/Login');
+                                  Navigator.popAndPushNamed(context, '/Signup');
                                 },
-                                child: Text(AppTexts.login))
+                                child: Text(AppTexts.signup))
                           ],
                         ),
                       ),

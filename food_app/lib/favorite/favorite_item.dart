@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/Home/home_item.dart';
 import 'package:food_app/core/app_colors.dart';
 
 class Favorite_Item extends StatefulWidget {
@@ -33,6 +34,15 @@ class _Favorite_Item extends State<Favorite_Item> {
         ],
       ),
       child: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/Detail',
+              arguments: Food_Item(
+                image_food: widget.image,
+                name_food: widget.name,
+                id_food: '',
+                favorite: widget.favorite,
+              ));
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
