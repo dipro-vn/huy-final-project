@@ -19,6 +19,13 @@ class _LoginScreen extends State<LoginScreen> {
   TextEditingController password = TextEditingController();
   String present = "";
   Timer? timer;
+  List<Data> _user = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +89,15 @@ class _LoginScreen extends State<LoginScreen> {
                                 borderRadius: BorderRadius.circular(20)),
                             backgroundColor: AppColors.orange),
                         onPressed: () {
-                          Navigator.popAndPushNamed(
-                            context,
-                            '/Home',
-                          );
+                          for (var i in _user) {
+                            if (i.email == email.text &&
+                                i.password == password.text) {
+                              Navigator.popAndPushNamed(
+                                context,
+                                '/Home',
+                              );
+                            }
+                          }
                         },
                         child: Text(
                           AppTexts.login,
@@ -225,5 +237,52 @@ class _LoginScreen extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future<http.Response> getUser() async {
+    return await http
+        .get(Uri.parse('https://6464566f127ad0b8f89c9636.mockapi.io/Users'));
+  }
+
+  Future<void> fetchUser() async {
+    var result = await getUser();
+    var userMap = jsonDecode(result.body);
+    final List data = userMap;
+    var ls = data
+        .map(
+          (e) => Data.fromJson(e),
+        )
+        .toList();
+    setState(() {
+      _user = ls;
+    });
+  }
+}
+
+class Data {
+  String? name;
+  String? email;
+  String? password;
+  String? avata;
+  String? id;
+
+  Data({this.name, this.email, this.password, this.avata, this.id});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    password = json['password'];
+    avata = json['avata'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    data['avata'] = this.avata;
+    data['id'] = this.id;
+    return data;
   }
 }

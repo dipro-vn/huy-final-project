@@ -21,7 +21,7 @@ class _FoodRandom extends State<FoodRandom> {
         .get(Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'));
   }
 
-  Future<void> fetchDataaa() async {
+  Future<void> fetchRamdom() async {
     var result = await getData();
     var userMap = jsonDecode(result.body);
     final List data = userMap["meals"];
@@ -34,18 +34,19 @@ class _FoodRandom extends State<FoodRandom> {
       _daataa = abc;
       isLoading = false;
     });
+    print(data);
   }
 
   @override
   void initState() {
     super.initState();
-    fetchDataaa();
+    fetchRamdom();
   }
 
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? CircularProgressIndicator()
+        ? Container()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

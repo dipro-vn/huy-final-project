@@ -18,12 +18,17 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreen extends State<SignUpScreen> {
+  TextEditingController fullname = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController email = TextEditingController();
 
   void SignUp() async {
-    Map data = {'email': email.text, 'password': password.text};
-    var response = await http.post(
+    Map data = {
+      'email': email.text,
+      'password': password.text,
+      'name': fullname.text
+    };
+    await http.post(
         Uri.parse('https://6464566f127ad0b8f89c9636.mockapi.io/Users'),
         body: data);
   }
@@ -56,6 +61,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFormField(
+                      controller: fullname,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: "Full name",
@@ -91,9 +97,26 @@ class _SignUpScreen extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(20)),
                         backgroundColor: AppColors.orange,
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         SignUp();
-                        Navigator.popAndPushNamed(context, '/Login');
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Sign Up Success'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.popAndPushNamed(
+                                    context, '/Login'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                       child: Text(
                         AppTexts.signup,
@@ -110,7 +133,10 @@ class _SignUpScreen extends State<SignUpScreen> {
                               color: Color.fromARGB(255, 17, 17, 17)),
                         ),
                         TextButton(
-                            onPressed: () {}, child: Text(AppTexts.login)),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/Login');
+                            },
+                            child: Text(AppTexts.login)),
                       ],
                     ),
                   ],

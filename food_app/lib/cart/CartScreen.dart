@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:food_app/Home/home_item.dart';
+import 'package:food_app/Oder/List_Oder.dart';
 import 'package:food_app/cart/Cart_Item.dart';
 import 'package:food_app/cart/List_cart.dart';
 import 'package:food_app/core/app_colors.dart';
@@ -50,63 +51,69 @@ class _CartScreen extends State<CartScreen> {
       child: _carts.length == 0
           ? Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                          alignment: Alignment.center,
-                          height: 38,
-                          width: 38,
-                          margin: const EdgeInsets.only(top: 10, left: 15),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: AppColors.white,
-                          ),
-                          child: Image.asset(
-                            AppImages.back,
-                            width: 5,
-                            height: 9.5,
-                          )),
-                    ),
-                    const Text(
-                      'Cart',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                    ),
-                    const SizedBox(
-                      width: 38,
-                    )
-                  ],
+                Container(
+                  margin: EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/Home'));
+                        },
+                        child: Container(
+                            alignment: Alignment.center,
+                            height: 38,
+                            width: 38,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.white,
+                            ),
+                            child: Image.asset(
+                              AppImages.back,
+                              width: 5,
+                              height: 9.5,
+                            )),
+                      ),
+                      const Text(
+                        'Cart',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        width: 38,
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(40),
-                    child: Text('No Cart')),
+                    child: Text(
+                      'No Cart',
+                      style: TextStyle(fontSize: 20),
+                    )),
               ],
             )
           : SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 10),
+                    margin: EdgeInsets.all(15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            Navigator.popUntil(
+                                context, ModalRoute.withName('/Home'));
                           },
                           child: Container(
                               alignment: Alignment.center,
                               height: 38,
                               width: 38,
-                              margin: const EdgeInsets.only(top: 10, left: 15),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: AppColors.white,
@@ -313,10 +320,10 @@ class _CartScreen extends State<CartScreen> {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   const SizedBox(
-                                    width: 2,
+                                    width: 5,
                                   ),
                                   Text(
-                                    '(${_carts.length}items)',
+                                    '(${_carts.length} items)',
                                     style: const TextStyle(
                                         fontSize: 14, color: Color(0xffBEBEBE)),
                                   )
@@ -330,7 +337,54 @@ class _CartScreen extends State<CartScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      oder1.length == 0
+                          ? {
+                              for (var i in _carts)
+                                oder1.add(Oder(
+                                    image: i.image,
+                                    name: i.name,
+                                    price: i.price,
+                                    quantity: i.quantity))
+                            }
+                          : oder2.length == 0
+                              ? {
+                                  for (var i in _carts)
+                                    oder2.add(Oder(
+                                        image: i.image,
+                                        name: i.name,
+                                        price: i.price,
+                                        quantity: i.quantity))
+                                }
+                              : oder3.length == 0
+                                  ? {
+                                      for (var i in _carts)
+                                        oder3.add(Oder(
+                                            image: i.image,
+                                            name: i.name,
+                                            price: i.price,
+                                            quantity: i.quantity))
+                                    }
+                                  : {
+                                      for (var i in _carts)
+                                        oder4.add(Oder(
+                                            image: i.image,
+                                            name: i.name,
+                                            price: i.price,
+                                            quantity: i.quantity))
+                                    };
+
+                      print('${oder1.length} 1');
+                      print('${oder2.length} 2');
+                      print('${oder3.length} 3');
+                      print('${oder4.length} 4');
+
+                      await Navigator.pushNamed(context, '/Oder');
+                      _carts.clear();
+                      setState(() {
+                        cart = _carts;
+                      });
+
                       cartTotalPrice();
                     },
                     child: Container(

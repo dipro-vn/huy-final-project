@@ -61,7 +61,9 @@ class DrawerHome extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         fontFamily: AppFonts.nunitoSans),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Oder');
+                  },
                 ),
                 ListTile(
                   leading: Image.asset(
@@ -111,7 +113,7 @@ class DrawerHome extends StatelessWidget {
                         fontFamily: AppFonts.nunitoSans),
                   ),
                   onTap: () {
-                    Navigator.pushNamed(context, 'Address');
+                    Navigator.pushNamed(context, '/Address');
                   },
                 ),
                 ListTile(
